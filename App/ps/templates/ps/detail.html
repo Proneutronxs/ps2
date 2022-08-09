@@ -1,0 +1,39 @@
+{% extends "ps/index.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section>
+    {% if id %}
+        {% for h in id %}
+            <div class="tm-bg-transparent-black tm-contact-box-pad">
+                <div class="row mb-4">
+                    <div class="col-sm-12">
+                        <header><h2 class="tm-text-shadow">{{h.nombre}}</h2></header>
+                    </div>
+                </div>
+                <div class="tm-address-box">
+                    <p style="font-size: 15;">{{h.descripción}}.</p>
+                </div>
+                <div class="row tm-page-4-content">
+                    <div class="col-md-6 col-sm-12 tm-contact-col">
+                        <div class="contact_message">
+                            <div  class="contact-form">
+                                <div class="form-group" style="text-align: center;">
+                                    <img src="{{h.imagen}}"  style="text-align: center;" alt="Image" class="img-fluid" width="180">
+                                </div>
+                                <a href="{% url 'project' %}" class="btn tm-btn-submit tm-btn ml-auto">Volver</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 tm-contact-col" style="text-align: center;">
+                        <img src="{%static 'ps/img/psfinal.png' %}" width="200" alt="Image" style="text-align: center;">
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</section>
+
+{% endblock %}

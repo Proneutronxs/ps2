@@ -1,0 +1,31 @@
+{% extends "ps/index.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section>						
+    <div class="row mb-4">
+        <header class="col-xl-12"><h2 class="tm-text-shadow">Acerca de mi</h2></header>		
+    </div>
+    <div class="row">
+        {% if abouthtml %}
+            {% for i in abouthtml %}
+                <div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
+                    <div class="media tm-bg-transparent-black tm-border-white">
+                        <div class="media-body">
+                            <h3>{{i.titulo}}</h3>
+                            <p>{{i.descripcion}}</p>	
+                        </div>
+                    </div>
+                </div>	
+            {% endfor %}
+        {% endif %}			          		
+    </div>
+</section>
+<footer class="footer-link">
+    <p class="tm-copyright-text">Free Template - 2022 Josué Chambí 
+    - Proneutronxs</p>
+</footer>
+
+{% endblock %}

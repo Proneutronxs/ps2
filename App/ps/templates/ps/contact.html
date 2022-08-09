@@ -1,0 +1,52 @@
+{% extends "ps/index.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section>
+    <div class="tm-bg-transparent-black tm-contact-box-pad">
+        <div class="row mb-4">
+            <div class="col-sm-12">
+                <header><h2 class="tm-text-shadow">Contactame!</h2></header>
+            </div>
+        </div>
+        <div class="tm-address-box">
+            <p style="font-size: 15;">Podés dejarme un mensaje mediante este formulario o contactarme por mis redes sociales:</p>
+            <p>
+                <a title="Instagram" href="https://www.instagram.com/proneutronx/"><img src="{%static 'ps/img/Instagram.png' %}" alt="Instagram" class="instagram" width="40"/></a>
+                <a title="Facebook" style="margin-left: 10%; margin-right: 10%;" href="https://www.facebook.com/Proneutronxs"><img src="{%static 'ps/img/Facebook.png' %}" alt="Facebook" class="facebook" width="40"/></a>
+                <a title="Twitter" href="https://twitter.com/Proneutronxs"><img src="{%static 'ps/img/Twitter.png' %}" alt="Twitter" class="twitter" width="40"/></a>
+            </p>
+            <address style="font-size: 15;">
+                General Roca - Río Negro
+                <br>
+                Argentina
+            </address>
+        </div>
+        <div class="row tm-page-4-content">
+            <div class="col-md-6 col-sm-12 tm-contact-col">
+                <div class="contact_message">
+                    <form action="#contact" method="post" class="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="contact_message" name="contact_message" class="form-control" rows="9" placeholder="mensaje" required></textarea>
+                        </div>
+                        <button type="submit" class="btn tm-btn-submit tm-btn ml-auto">Envíar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 tm-contact-col" style="text-align: center;">
+                <img src="{%static 'ps/img/psfinal.png' %}" width="120" alt="Image" style="text-align: center;">
+                <p class="mb-5 tm-font-big">"Si puedes imaginarlo ... puedes programarlo!"</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
