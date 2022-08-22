@@ -5,3 +5,4 @@ from .models import *
 
 admin.site.register(about)
 admin.site.register(projects)
+admin.site.register(send)
