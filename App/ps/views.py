@@ -30,7 +30,10 @@ def about1(request):
 
 def contact(request):
     if request.GET.get("contact_name"):
-        sendContact = send(nombre = 'contact_name', email = 'contact_email', mensaje = 'contact_message')
+        name = request.GET.get("contact_name",0)
+        email = request.GET.get("contact_email",1)
+        message = request.GET.get("contact_message",2)
+        sendContact = send(nombre = name, email = email, mensaje = message)
         sendContact.save()
         variable = "contacto"
         return render(request,'ps/send.html', {'inicio': variable, 'proyecto': variable, 'consumoApi': variable, 'about': variable, 'contacto': variable})
