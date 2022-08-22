@@ -10,3 +10,8 @@ class projects(models.Model):
     nombre = models.CharField(max_length=255)
     descripción = models.TextField()
     imagen = models.TextField()
+
+class send(models.Model):
+    nombre = models.CharField(max_length=255)
+    email = models.EmailField()
+    mensaje = models.CharField(max_length=255)

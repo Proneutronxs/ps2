@@ -29,5 +29,12 @@ def about1(request):
     return render(request,'ps/about.html', {'abouthtml':about1,'inicio': variable, 'proyecto': variable, 'consumoApi': variable, 'about': variable, 'contacto': variable})
 
 def contact(request):
-    variable = "contacto"
-    return render(request,'ps/contact.html', {'inicio': variable, 'proyecto': variable, 'consumoApi': variable, 'about': variable, 'contacto': variable})
+    if request.GET.get("contact_name"):
+        sendContact = send(nombre = 'contact_name', email = 'contact_email', mensaje = 'contact_message')
+        sendContact.save()
+        variable = "contacto"
+        return render(request,'ps/send.html', {'inicio': variable, 'proyecto': variable, 'consumoApi': variable, 'about': variable, 'contacto': variable})
+    else:
+        variable = "contacto"
+        return render(request,'ps/contact.html', {'inicio': variable, 'proyecto': variable, 'consumoApi': variable, 'about': variable, 'contacto': variable})
+

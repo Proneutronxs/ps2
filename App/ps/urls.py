@@ -8,4 +8,5 @@ urlpatterns = [
     path('api', views.consumoApi, name="consumoApi"),
     path('about', views.about1, name="about"),
     path('contact', views.contact, name="contact"),
+    path('sendMessage', views.sendMessage, name="sendMessage"),
 ]
