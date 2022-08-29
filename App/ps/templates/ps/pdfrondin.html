@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF - Document</title>
+</head>
+<body>
+    <nav>
+        <img src="static/ps/img/zt.jpg" width="200" height="40" alt="Image" style="margin-top: 0;">
+    </nav>
+    <section>
+        {% for h in datosResult2 %}
+            <div style="text-align: right;">
+                <p>{{h.fechaActual2}} - {{h.hora}}</p>
+            </div>            
+           
+        {% endfor %}    
+    </section>
+    <section>
+        {% for j in datosResult2 %}
+            <u><b><p>{{j.planta}} Desde: {{j.formatStart}} Hasta: {{j.formatEnd}}</p></b></u>
+        {% endfor %}
+    </section>
+    <center>
+        <table class="table" border="1">
+            <thead>
+              <tr>
+                <th scope="col" style="background-color: yellow; height: 30px; text-align: center;" >PLANTA</th>
+                <th scope="col" style="background-color: yellow; height: 30px; text-align: center;" >SERENO</th>
+                <th scope="col" style="background-color: yellow; height: 30px; text-align: center;" >FECHA</th>
+                <th scope="col" style="background-color: yellow; height: 30px; text-align: center;" >HORA</th>
+                <th scope="col" style="background-color: yellow; height: 30px; text-align: center;" >PUNTO</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% if resutadohtml %}
+                    {% for i in resutadohtml %}
+                        <tr>
+                            <td style=" height: 20px; text-align: center;" >{{i.Planta}}</td>
+                            <td style=" height: 20px; text-align: center;" >{{i.Sereno}}</td>
+                            <td style=" height: 20px; text-align: center;" >{{i.Fecha}}</td>
+                            <td style=" height: 20px; text-align: center;" >{{i.Hora}}</td>
+                            <td style=" height: 20px; text-align: center;" >{{i.Punto}}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </center>
+</body>
+</html>

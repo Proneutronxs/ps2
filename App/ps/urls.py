@@ -8,4 +8,9 @@ urlpatterns = [
     path('api', views.consumoApi, name="consumoApi"),
     path('about', views.about1, name="about"),
     path('contact', views.contact, name="contact"),
+
+
+    ##Prueba Rondin
+    path('search', views.sqlQuery, name="search"),
+    path('render/pdf', views.renderPDF2, name="renderpdf"),
 ]
