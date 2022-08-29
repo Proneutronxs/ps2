@@ -294,6 +294,9 @@ address { font-size: 1rem; }
 
 .tm-copyright-text {
     display: inline-block;
+    border-radius: 10px;
+    border-color: #33ccff;
+    border: 1px;
     background-color: rgba(0,0,0,0.5);
 }
 
