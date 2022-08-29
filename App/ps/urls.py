@@ -12,5 +12,4 @@ urlpatterns = [
 
     ##Prueba Rondin
     path('search', views.sqlQuery, name="search"),
-    path('render/pdf', views.renderPDF2, name="renderpdf"),
 ]
