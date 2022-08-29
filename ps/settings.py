@@ -25,7 +25,7 @@ SECRET_KEY = '2r(wxw+a%^a@!5-nbrzzj^*-l3+ewp*)9lq2o9#j(w#2*tb&_^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['144.22.49.74', 'proneutronxs.com.ar', 'www.proneutronxs.com.ar']
+ALLOWED_HOSTS = ['144.22.49.74', 'proneutronxs.com.ar', 'www.proneutronxs.com.ar', '*']
 
 
 # Application definition
