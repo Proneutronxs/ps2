@@ -283,6 +283,9 @@ address { font-size: 1rem; }
     position: absolute;
     bottom: 20px;
     right: 20px;
+    border-radius: 10px;
+    border-color: #33ccff;
+    border: 1px;
     margin-left: 20px;
     color: white;
     text-align:right;    
