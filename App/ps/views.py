@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import *
 from urllib import request
 from django.views.generic.detail import DetailView
-#from ps.conexion import Zetone
+from ps.conexion import Zetone
 from datetime import datetime
 from xhtml2pdf import pisa
 from django.template.loader import get_template
@@ -15,7 +15,7 @@ from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
 import pyodbc
 
-server = '191.97.47.105'
+""" server = '191.97.47.105'
 db = 'MyZetto'
 user = 'sa'
 psw = 'Sideswipe348'
@@ -23,7 +23,7 @@ try:
     Zetone = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server}; SERVER=' +server+'; DATABASE='+db+'; UID='+user+'; PWD='+psw)
     #print("CONECTADO")
 except Exception as e: 
-    print(e)
+    print(e) """
 
 # Create your views here.
 def index(request):
