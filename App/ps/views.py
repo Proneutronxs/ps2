@@ -97,6 +97,7 @@ def sqlQuery(request):
                 for ron in datos:
                     resultado = {'Planta': ron[0], 'Sereno': ron[1], 'Fecha': ron[2], 'Hora': ron[3], 'Punto': ron[4]}
                     lista.append(resultado)
+                cursor.close()
                 datosResult = [{'planta':planta, 'formatStart':formatStart, 'formatEnd':formatEnd, 'logo': logo, 'hora': hora, 'fechaActual2': fechaActual2}]
                 try:
                     template_path = 'ps/pdfrondin.html'
@@ -112,6 +113,7 @@ def sqlQuery(request):
                     print("Exception")
                     print (e)
             else:
+                cursor.close()
                 return render(request,'ps/rondin.html')
         except Exception as e:
             print (e)
