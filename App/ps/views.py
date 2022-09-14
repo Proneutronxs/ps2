@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from .models import *
 from urllib import request
 from django.views.generic.detail import DetailView
-from ps.conexion import Zetone
 from datetime import datetime
 from xhtml2pdf import pisa
 from django.template.loader import get_template
@@ -15,15 +14,6 @@ from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
 import pyodbc
 
-""" server = '191.97.47.105'
-db = 'MyZetto'
-user = 'sa'
-psw = 'Sideswipe348'
-try:
-    Zetone = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server}; SERVER=' +server+'; DATABASE='+db+'; UID='+user+'; PWD='+psw)
-    #print("CONECTADO")
-except Exception as e: 
-    print(e) """
 
 # Create your views here.
 def index(request):
@@ -81,6 +71,7 @@ def sqlQuery(request):
         fechaActual = str(dia) + str(mes) + str(año)
         fechaActual2 = str(dia) + "-" + str(mes) + "-" + str(año)
         try:
+            from ps.conexion import Zetone
             cursor = Zetone.cursor()
             sqlQuery = ("SELECT      Plantas.plantas As Planta, Serenos.sereno AS Sereno, CONVERT(varchar(10), Registros.fechayhora, 103) AS Fecha,CONVERT(varchar(5), Registros.fechayhora, 108) AS Hora, Puntos.punto AS Punto\n" +
                         "FROM            Registros INNER JOIN\n" +
