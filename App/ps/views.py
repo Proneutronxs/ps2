@@ -6,6 +6,7 @@ from django.views.generic.detail import DetailView
 from datetime import datetime
 from xhtml2pdf import pisa
 from django.template.loader import get_template
+from ps.conexion import *
 import os
 from django.conf import settings
 from django.http import HttpResponse
