@@ -42,37 +42,21 @@
             <header class="mb-4"><b><h1 class="tm-text-shadow"><img src="{%static 'ps/img/Logo.png' %}" width="100" alt="Image">EMPRESA ZETONE</h1></b></header>
         </center>
         <center>
-            <div style="border: 1px solid #01a7e1; border-radius: 15px; width:50%">
-                <div style="margin-top: 10px;">
-                    <h5>Datos Rondín</h5>
-                </div>
-                <form action="" method="GET">
-                    <div style="margin-top: 10px;">
-                        <label for="start">Desde:</label> <br>
-                        <input class="btn ml-auto" type="date" id="start" name="start">
-                    </div>
-                    <div style="margin-top: 10px;">
-                        <label for="end">Hasta:</label> <br>
-                        <input class="btn ml-auto" type="date" id="end" name="end">
-                    </div>
-                    <div style="margin-top: 10px;">
-                        <select class="combo btn ml-auto" type="checkbox" id="planta" name="planta">
-                            <option value="Planta Uno">Planta Uno</option>
-                            <option value="Planta Dos">Planta Dos</option>
-                        </select>
-                    </div>
-                    <div style="margin-top: 10px; margin-bottom: 12px;">
-                        <a href="{% url 'search' %}">
-                            <input class="btn ml-auto" type="submit" value="Generar PDF">
-                        </a>
-                    </div>
-                </form>
+            <div>
+                {% if error %}
+                    {% for i in error %}
+                    <h5>No se pudo procesar la solicitud, intente nuevamente más tarde, gracias.</h5>
+                        <p>(Error: {{i}})</p>
+                    {% endfor %}
+                {% endif %}
             </div>
-        </center>
-        <center>
-                <footer class="footer-link"><p class="tm-copyright-text">2022 Josué Chambí 
-                    - Proneutronxs</p>
-                </footer>
+            <div style="margin-top: 10px; width: 20%; height: 12px;">
+                <a href="{% url 'search' %}"><input class="btn ml-auto" type="button" value="Volver"></a>
+            </div>
+            <footer class="footer-link">
+                <p class="tm-copyright-text">2022 Josué Chambí 
+                - Proneutronxs</p>
+            </footer>
             
         </center>
 

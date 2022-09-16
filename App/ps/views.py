@@ -71,8 +71,8 @@ def sqlQuery(request):
         fechaActual = str(dia) + str(mes) + str(año)
         fechaActual2 = str(dia) + "-" + str(mes) + "-" + str(año)
         try:
-            from ps.conexion import Zetone
-            cursor = Zetone.cursor()
+            Rondin = SQLRondin()        
+            cursor = Rondin.cursor()
             sqlQuery = ("SELECT      Plantas.plantas As Planta, Serenos.sereno AS Sereno, CONVERT(varchar(10), Registros.fechayhora, 103) AS Fecha,CONVERT(varchar(5), Registros.fechayhora, 108) AS Hora, Puntos.punto AS Punto\n" +
                         "FROM            Registros INNER JOIN\n" +
                                 "Serenos ON Registros.sereno = Serenos.id INNER JOIN\n" +
@@ -88,13 +88,13 @@ def sqlQuery(request):
                 for ron in datos:
                     resultado = {'Planta': ron[0], 'Sereno': ron[1], 'Fecha': ron[2], 'Hora': ron[3], 'Punto': ron[4]}
                     lista.append(resultado)
-                Zetone.close()
+                Rondin.close()
                 datosResult = [{'planta':planta, 'formatStart':formatStart, 'formatEnd':formatEnd, 'logo': logo, 'hora': hora, 'fechaActual2': fechaActual2}]
                 try:
                     template_path = 'ps/pdfrondin.html'
                     context = {'resutadohtml': lista, 'datosResult2': datosResult}
                     response = HttpResponse(content_type='application/pdf')
-                    response['Content-Disposition'] = 'attachment; filename= "Rondin - '+ fechaActual + "-" + str(hora) +'.pdf"'
+                    response['Content-Disposition'] = 'attachment; filename= "Rondin - '+ planta +' - '+ fechaActual + "-" + str(hora) +'.pdf"'
                     template = get_template(template_path)
                     html = template.render(context)
                     pisa_status = pisa.CreatePDF(
@@ -104,10 +104,13 @@ def sqlQuery(request):
                     print("Exception")
                     print (e)
             else:
-                Zetone.close()
-                return render(request,'ps/rondin.html')
+                Rondin.close()
+                lista = ["No existen datos para esa Fecha"]
+                return render(request,'ps/error.html', {'error': lista})
         except Exception as e:
+            lista = [e]
             print (e)
-            return render(request,'ps/rondin.html')
+            print(lista)
+            return render(request,'ps/error.html', {'error': lista})
     else:
         return render(request,'ps/rondin.html')
