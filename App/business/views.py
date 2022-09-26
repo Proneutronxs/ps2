@@ -38,7 +38,7 @@ def verRegistros(request):
         try:
             Rondin = ps_Rondin()        
             cursor_export = Rondin.cursor()
-            sqlQuery = ("SELECT      Plantas.planta As Planta, Legajos.Nombre AS Sereno, Registros.Fecha Fecha, Registros.Hora AS Hora, Puntos.Ubicacion AS Ubicación\n" +
+            sqlQuery = ("SELECT      Plantas.planta As Planta, Legajos.Nombre AS Sereno, DATE_FORMAT(Fecha, '%d/%m/%Y') AS Fecha, Registros.Hora AS Hora, Puntos.Ubicacion AS Ubicación\n" +
                         "FROM            Registros INNER JOIN\n" +
                                 "Legajos ON Registros.Sereno = Legajos.ID INNER JOIN\n" +
                                 "Plantas ON Registros.Planta = Plantas.ID INNER JOIN\n" +
@@ -89,7 +89,7 @@ def exportRondin(request):
         try:
             Rondin = ps_Rondin()        
             cursor_export = Rondin.cursor()
-            sqlQuery = ("SELECT      Plantas.planta As Planta, Legajos.Nombre AS Sereno, Registros.Fecha Fecha, Registros.Hora AS Hora, Puntos.Ubicacion AS Ubicación\n" +
+            sqlQuery = ("SELECT      Plantas.planta As Planta, Legajos.Nombre AS Sereno, DATE_FORMAT(Fecha, '%d/%m/%Y') AS Fecha, Registros.Hora AS Hora, Puntos.Ubicacion AS Ubicación\n" +
                         "FROM            Registros INNER JOIN\n" +
                                 "Legajos ON Registros.Sereno = Legajos.ID INNER JOIN\n" +
                                 "Plantas ON Registros.Planta = Plantas.ID INNER JOIN\n" +
