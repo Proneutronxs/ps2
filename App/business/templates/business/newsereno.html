@@ -1,0 +1,32 @@
+{% extends "business/business.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section>						
+    <div class="row mb-4">
+        <header class="mb-4"><b><h2 class="tm-text-shadow"><img src="{%static 'business/img/Logo.png' %}" width="100" alt="Image">Rondín - Ingresar Sereno </h2></b></header>	
+    </div>
+    <div>
+        <div class="media tm-bg-transparent-black tm-border-white">
+            <div class="media-body" style="text-align: center;">
+                <h3>Nuevo Sereno</h3>
+                <form action="" method="GET">{% csrf_token %}
+                    <div class="form-group">
+                        <input maxlength="4" type="number" id="legajo_sereno" name="legajo_sereno" class="form-control" placeholder="0000" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="nombre_sereno" name="nombre_sereno" class="form-control" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="autorizado" name="autorizado" class="form-control" placeholder="Token" required>
+                    </div>
+                    <button type="submit" class="btn tm-btn-submit tm-btn ml-auto"style="width:100%;">Guardar</button>
+                </form>	
+            </div>
+        </div>          		
+    </div>
+</section>
+
+{% endblock %}

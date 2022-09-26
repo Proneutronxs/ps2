@@ -1,0 +1,28 @@
+{% extends "ps/index.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section>						
+    <div class="row mb-4">
+        <header class="col-xl-12"><h2 class="tm-text-shadow">Proyectos</h2></header>
+        <p style="text-align: center;">(Click en la imágen para mas info)</p>	
+    </div>
+    <div class="row">
+        {% if proyectoshtml %}
+            {% for h in proyectoshtml %}
+                <div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
+                    <div class="media tm-bg-transparent-black tm-border-white">
+                        <div class="media-body"  style="text-align: center;">
+                            <h3 style="text-align: center;">{{h.nombre}}</h3>
+                            <a href="{% url 'detail' h.id %}"><img src="{{h.imagen}}"  style="text-align: center;" alt="Image" class="img-fluid" width="120"></a>{% csrf_token %}	
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>						               
+</section>
+
+{% endblock %}

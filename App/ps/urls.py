@@ -11,5 +11,5 @@ urlpatterns = [
 
 
     ##Prueba Rondin
-    path('search', views.sqlQuery, name="search"),
+    ####path('search', views.sqlQuery, name="search"),
 ]

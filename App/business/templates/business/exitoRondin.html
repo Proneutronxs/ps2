@@ -1,0 +1,18 @@
+{% extends "business/business.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section >
+    <div class="ml-auto">
+        <header class="mb-4"><b><h1 class="tm-text-shadow"><img src="{%static 'business/img/Logo.png' %}" width="100" alt="Image">EMPRESA ZETONE</h1></b></header>
+        {% if error %}
+            <p class="mb-5 tm-font-big">{{error}}</p>
+        {% endif %}
+        <a href="{% url 'rondin' %}" class="btn tm-btn-submit tm-btn ml-auto">Volver</a>
+    </div>
+</section>
+
+
+{% endblock %}

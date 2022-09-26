@@ -1,0 +1,22 @@
+{% extends "business/business.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section >
+    <header class="mb-4"><b><h1 class="tm-text-shadow"><img src="{%static 'business/img/Logo.png' %}" width="100" alt="Image">EMPRESA ZETONE</h1></b></header>
+    <div>
+        {% if error %}
+            <h5>No se pudo procesar la solicitud, intente nuevamente más tarde, gracias.</h5>
+                <b><h5>(Error: {{error}})</h5></b>
+        {% endif %}
+    </div>
+    <div style="margin-top: 10px; width: 40%;">
+        <a href="{% url 'rondin' %}" class="btn tm-btn-submit tm-btn ml-auto" >Volver</a>
+    </div>
+</section>
+
+
+{% endblock %}
+           

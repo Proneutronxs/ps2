@@ -1,0 +1,51 @@
+{% extends "business/business.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section>						
+    <div class="row mb-4">
+        <header class="mb-4"><b><h2 class="tm-text-shadow"><img src="{%static 'business/img/Logo.png' %}" width="100" alt="Image">Rondín</h2></b></header>	
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
+            <div class="media tm-bg-transparent-black tm-border-white">
+                <div class="media-body" style="text-align: center;">
+                    <h3>Nuevo Sereno</h3>
+                    <!-- <p>Guarde un sereno con su legajo.</p> -->
+                    <a href="{% url 'newsereno' %}" class="btn tm-btn-submit tm-btn ml-auto" style="width:30%;">&#10145;</a>	
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
+            <div class="media tm-bg-transparent-black tm-border-white">
+                <div class="media-body" style="text-align: center;">
+                    <h3>Gestionar Serenos</h3>
+                    <!-- <p>Modifique los serenos existentes.</p> -->
+                    <a href="#" class="btn tm-btn-submit tm-btn ml-auto" style="width:30%;">&#10145;</a>		
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
+            <div class="media tm-bg-transparent-black tm-border-white">
+                <div class="media-body" style="text-align: center;">
+                    <h3>Ver Registros</h3>
+                    <!-- <p>Vea los registros seleccionados.</p> -->
+                    <a href="{% url 'viewrecords' %}" class="btn tm-btn-submit tm-btn ml-auto" style="width:30%;">&#10145;</a>		
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
+            <div class="media tm-bg-transparent-black tm-border-white">
+                <div class="media-body" style="text-align: center;">
+                    <h3>Exportar Registros</h3>
+                    <!-- <p>Exporte los registros a un archivo PDF.</p> -->
+                    <a href="{% url 'exportRondin' %}" class="btn tm-btn-submit tm-btn ml-auto" style="width:30%;">&#10145;</a>		
+                </div>
+            </div>
+        </div>		          		
+    </div>
+</section>
+
+{% endblock %}

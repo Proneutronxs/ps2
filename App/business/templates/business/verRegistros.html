@@ -1,0 +1,67 @@
+{% extends "business/business.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section>						
+    <div class="row mb-4">
+        <header class="col-xl-12"><h2 class="tm-text-shadow"><img src="{%static 'business/img/Logo.png' %}" width="100" alt="Image">Rondín - Ver Registros</h2></header>		
+    </div>
+    <div class="row">
+        <div class="media tm-bg-transparent-black tm-border-white">
+            <div class="media-body" style="text-align: center;">
+                <form action="" method="GET">{% csrf_token %}
+                    <div class="form-group">
+                        <label for="start">Desde:</label> <br>
+                        <input type="date" id="start" name="start" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="end">Hasta:</label> <br>
+                        <input type="date" id="end" name="end" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <select class="btn tm-btn-submit tm-btn ml-auto" type="checkbox" id="planta" name="planta" style="width:100%;">
+                            <option value="Planta Uno">Planta Uno</option>
+                            <option value="Planta Dos">Planta Dos</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn tm-btn-submit tm-btn ml-auto" style="width:100%;">Ver</button>
+                    </div>                     
+                </form>	
+            </div>
+        </div>
+        {% if constante == "activo" %}
+            <div class="media tm-bg-transparent-black tm-border-white">
+                <div class="media-body" style="text-align: center; height: 100%;">
+                    <table class="table" style="height: 350px;">
+                        {% if datosResult %}
+                            {% for h in datosResult %}
+                                <h5>{{h.planta}} - {{h.formatStart}} al {{h.formatEnd}}</h5>
+                            {% endfor %}
+                        {% endif %}
+                        <thead style="display: auto;">
+                            <tr>
+                            </tr>
+                        </thead>
+                        <tbody style="display: block; height: 100%; width: 100%; overflow-y: auto; overflow-x: hidden;">
+                            {% if busquedahtml %}
+                                {% for i in busquedahtml %}
+                                    <tr>
+                                        <th scope="row">{{i.Sereno}}</th>
+                                        <td>{{i.Fecha}}</td>
+                                        <td>{{i.Hora}}</td>
+                                        <td>{{i.Punto}}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}
