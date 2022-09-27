@@ -28,7 +28,7 @@ def rondin(request):
     return render(request,'business/rondin.html', {'business': variable, 'rondin': variable})
 
 def verRegistros(request):
-    if request.GET.get("start"):
+    if request.GET.get("start") and request.GET.get("end"):
         start = request.GET.get("start", 0)
         end = request.GET.get("end", 1)
         planta = request.GET.get("planta", 2)
@@ -72,7 +72,7 @@ def verRegistros(request):
         return render(request,'business/verRegistros.html', {'business': variable, 'rondin': variable})
 
 def exportRondin(request):
-    if request.GET.get("start"):
+    if request.GET.get("start") and request.GET.get("end"):
         start = request.GET.get("start", 0)
         end = request.GET.get("end", 1)
         planta = request.GET.get("planta", 2)
