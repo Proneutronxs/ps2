@@ -1,22 +1,28 @@
 from django.urls import path
 from App.business import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     
     #### WEB
 
-    path('', views.business, name="business"),
+    path('', views.index, name="index"),
+    path('zetone/', views.business, name="business"),
+    
+    
 
-    ### APP ZETONE
+    ### ZETONE
 
-    path('zetone/logIn', views.login, name="login"),
+    ### EMPAQUE
+    path('zetone/empaque/', views.empaque, name="empaque"),
+
 
     ### RONDIN
 
-    path('rondin/', views.rondin, name="rondin"),
-    path('rondin/newsereno', views.newSereno, name="newsereno"),
-    path('rondin/viewRecords', views.verRegistros, name="viewrecords"),
-    path('rondin/export', views.exportRondin, name="exportRondin"),
+    path('zetone/empaque/rondin/', views.rondin, name="rondin"),
+    path('zetone/empaque/rondin/newsereno', views.newSereno, name="newsereno"),
+    path('zetone/empaque/rondin/viewRecords', views.verRegistros, name="viewrecords"),
+    path('zetone/empaque/rondin/export', views.exportRondin, name="exportRondin"),
 
     ### API
 

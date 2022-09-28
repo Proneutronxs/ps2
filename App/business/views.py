@@ -1,3 +1,4 @@
+from contextlib import redirect_stderr
 from email.mime import audio
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
@@ -7,26 +8,44 @@ from ps.conexion import *
 from xhtml2pdf import pisa
 from django.template.loader import get_template
 
+##LOGIN
+from django.contrib.auth.decorators import login_required
+from  django.contrib.auth import logout
+
+
+
 # Create your views here.
 
 ####### PARTES DE LA WEB
 
+def index(request):
+    return render(request,'business/index.html')
+
+@login_required
 def business(request):
     variable = "business"
     return render(request,'business/business.html', {'business': variable})
 
-#### ZONA APP ZETONE 
+#### ZONA ZETONE 
 
-def login(request):
-    variable = "business"
-    return render(request,'business/login.html', {'business': variable})
+def login_entrar(request):
+    return render(request,'business/registration/login.html')
 
-### ZONA RONDÍN
+### ZONA EMPAQUE ###
 
+@login_required
+def empaque(request):
+    variable = "empaque"
+    return render(request,'business/empaque/empaque.html', {'business': variable, 'empaque': variable})
+
+############## ZONA RONDÍN
+
+@login_required
 def rondin(request):
-    variable = "rondin"
-    return render(request,'business/rondin.html', {'business': variable, 'rondin': variable})
+    variable = "empaque"
+    return render(request,'business/empaque/rondin/rondin.html', {'business': variable, 'empaque': variable})
 
+@login_required
 def verRegistros(request):
     if request.GET.get("start") and request.GET.get("end"):
         start = request.GET.get("start", 0)
@@ -55,22 +74,23 @@ def verRegistros(request):
                     lista.append(resultado)
                 Rondin.close()
                 datosResult = [{'planta':planta, 'formatStart':formatStart, 'formatEnd':formatEnd}]
-                variable = "rondin"
+                variable = "empaque"
                 constante = "activo"
-                return render(request,'business/verRegistros.html', {'business': variable, 'rondin': variable, 'constante': constante, 'datosResult': datosResult, 'busquedahtml': lista})
+                return render(request,'business/empaque/rondin/verRegistros.html', {'business': variable, 'empaque': variable, 'constante': constante, 'datosResult': datosResult, 'busquedahtml': lista})
             else:
                 Rondin.close()
                 lista = ["No existen datos para esa Fecha"]
-                return render(request,'business/errorRondin.html', {'error': lista})
+                return render(request,'business/empaque/rondin/errorRondin.html', {'error': lista})
         except Exception as e:
             lista = [e]
             print (e)
             print(lista)
-            return render(request,'business/errorRondin.html', {'error': lista})
+            return render(request,'business/empaque/rondin/errorRondin.html', {'error': lista})
     else:
-        variable = "rondin"
-        return render(request,'business/verRegistros.html', {'business': variable, 'rondin': variable})
+        variable = "empaque"
+        return render(request,'business/empaque/rondin/verRegistros.html', {'business': variable, 'empaque': variable})
 
+@login_required
 def exportRondin(request):
     if request.GET.get("start") and request.GET.get("end"):
         start = request.GET.get("start", 0)
@@ -107,7 +127,7 @@ def exportRondin(request):
                 Rondin.close()
                 datosResult = [{'planta':planta, 'formatStart':formatStart, 'formatEnd':formatEnd, 'logo': logo, 'hora': hora, 'fechaActual2': fechaActual2}]
                 try:
-                    template_path = 'business/pdfrondin.html'
+                    template_path = 'business/empaque/rondin/pdfrondin.html'
                     context = {'resutadohtml': lista, 'datosResult2': datosResult}
                     response = HttpResponse(content_type='application/pdf')
                     response['Content-Disposition'] = 'attachment; filename= "Rondin - '+ planta +' - '+ fechaActual + "-" + str(hora) +'.pdf"'
@@ -120,20 +140,21 @@ def exportRondin(request):
                     lista = [e]
                     print (e)
                     print(lista)
-                    return render(request,'business/errorRondin.html', {'error': lista})
+                    return render(request,'business/empaque/rondin/errorRondin.html', {'error': lista})
             else:
                 Rondin.close()
                 lista = ["No existen datos para esa Fecha"]
-                return render(request,'business/errorRondin.html', {'error': lista})
+                return render(request,'business/empaque/rondin/errorRondin.html', {'error': lista})
         except Exception as e:
             lista = [e]
             print (e)
             print(lista)
-            return render(request,'business/errorRondin.html', {'error': lista})
+            return render(request,'business/empaque/rondin/errorRondin.html', {'error': lista})
     else:
-        variable = "rondin"
-        return render(request,'business/exportRondin.html', {'business': variable, 'rondin': variable})
+        variable = "empaque"
+        return render(request,'business/empaque/rondin/exportRondin.html', {'business': variable, 'empaque': variable})
 
+@login_required
 def newSereno(request):
     if request.GET.get("legajo_sereno"):
         legajo = request.GET.get("legajo_sereno",0)
@@ -142,10 +163,10 @@ def newSereno(request):
         variables = [legajo,nombre]
         if autorizado!= '4992':
             variable = "El Token no es válido!"
-            return render(request,'business/errorRondin.html', {'error': variable})
+            return render(request,'business/empaque/rondin/errorRondin.html', {'error': variable})
         elif len(legajo) > 4:            
             variable = "El Legajo no puede superar los cuatro(4) dígitos."
-            return render(request,'business/errorRondin.html', {'error': variable})
+            return render(request,'business/empaque/rondin/errorRondin.html', {'error': variable})
         else:
             Rondin = ps_Rondin()
             cursorRondin = Rondin.cursor()
@@ -156,7 +177,7 @@ def newSereno(request):
                 if if_consulta:
                     cursorRondin.close()
                     variable = "El Legajo ya existe!"
-                    return render(request,'business/errorRondin.html', {'error': variable})
+                    return render(request,'business/empaque/rondin/errorRondin.html', {'error': variable})
                 else:
                     try:
                         insertPunto = ("INSERT INTO `Legajos` (`ID`, `Nombre`) VALUES (%s, %s);")
@@ -165,18 +186,18 @@ def newSereno(request):
                         cursorRondin.close()
                         Rondin.close()
                         variable = "El Legajo se guardó correctamente."
-                        return render(request,'business/exitoRondin.html', {'error': variable})
+                        return render(request,'business/empaque/rondin/exitoRondin.html', {'error': variable})
                     except Exception as e:
                         print(e)
                         variable = "----ERROR DE CONEXIÓN----"
-                        return render(request,'business/errorRondin.html', {'error': variable})
+                        return render(request,'business/empaque/rondin/errorRondin.html', {'error': variable})
             except Exception as e:
                 print(e)
                 variable = "----ERROR DE CONEXIÓN----"
-                return render(request,'business/errorRondin.html', {'error': variable})
+                return render(request,'business/empaque/rondin/errorRondin.html', {'error': variable})
     else:
-        variable = "rondin"
-        return render(request,'business/newsereno.html', {'business': variable, 'rondin': variable})
+        variable = "empaque"
+        return render(request,'business/empaque/rondin/newsereno.html', {'business': variable, 'empaque': variable})
 
 #def insertSereno(request):
  

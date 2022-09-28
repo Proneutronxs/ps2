@@ -37,58 +37,41 @@
 		<div class="loader-section section-right"></div>
 	</div>
 
-	<div class="container-fluid tm-main">
-		<div class="row tm-main-row">
-			<div id="tmSideBar" class="col-xl-3 col-lg-4 col-md-12 col-sm-12 sidebar">
-				<button id="tmMainNavToggle" class="menu-icon">&#9776;</button>
-				<div class="inner">
-					<nav class="navegador">
-						<ul>
-							<li>
-                                <a href="{% url 'business' %}">
-                                    {% if business == "business" %}
-									<i class="fas fa-home tm-nav-fa-icon" style="color: #01a7e1;"></i>
-									<span style="color: #01a7e1;">Zetone</span>
-                                    {% else %}
-                                    <i class="fas fa-home tm-nav-fa-icon"></i>
-									<p>Zetone</p>
-                                    {% endif %}
-								</a>
-							</li>
-                            <li>
-                                <a href="{% url 'empaque' %}">
-									{% if empaque == "empaque" %}
-                                    <i class="fas fa-map tm-nav-fa-icon" style="color: #01a7e1;"></i>
-									<span style="color: #01a7e1;">Empaque</span>
-                                    {% else %}
-                                    <i class="fas fa-map tm-nav-fa-icon"></i>
-									<p>Empaque</p>
-                                    {% endif %}
-								</a>
-							</li>
-						</ul>
-					</nav>
-				</div>
-			</div>
+    <div class="container-fluid tm-main">
+        <div class="row tm-main-row">
+            <div id="tmSideBar" class="col-xl-3 col-lg-4 col-md-12 col-sm-12 sidebar">
+                
+            </div>
             
             <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 tm-content" style="background-color: rgba(0, 0, 0, 0.575);">
-                {% block content %}
-                    <section id="tm-section-1" class="tm-section">
-                        <div class="ml-auto">
-                            <header class="mb-4"><b><h1 class="tm-text-shadow"><img src="{%static 'business/img/Logo.png' %}" width="100" alt="Image">EMPRESA ZETONE</h1></b></header>
-                            
-                        </div>
-                    </section>
-                {% endblock %}
+                <section id="tm-section-1" class="tm-section">
+                    <div class="ml-auto">
+                        <header class="mb-4"><b><h1 class="tm-text-shadow"><img src="{%static 'business/img/Logo.png' %}" width="100" alt="Image">EMPRESA ZETONE</h1></b></header>
+                        <div class="media tm-bg-transparent-black tm-border-white">
+                            <div class="media-body" style="text-align: center;">
+                                <h3>Ingresar</h3>
+                                <form action="" method="POST">{% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="text" id="username" name="username" class="form-control" placeholder="User" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn tm-btn-submit tm-btn ml-auto" style="width:100%;">Entrar</button>
+                                    </div>
+                                </form>		
+                            </div>
+                        </div>  
+                    </div>
+                </section>
                 <footer class="footer-link">
-                    {% if request.user.is_authenticated %}
-					    <li class="tm-copyright-text"><a href="{% url 'logout' %}" style="color: red;">SALIR</a><h6>{{user.username | upper}}</h6></b></li><br>
-				    {% endif %}
                     <p class="tm-copyright-text"><img src="{%static 'business/img/psfinal.png' %}" width="30" alt="Image">2022 Josué Chambí 
                     - Proneutronxs</p>
                 </footer>
             </div>
-		</div>
+        </div>
+    </div>
 
         <script src="{%static 'business/js/jquery-3.2.1.min.js' %}"></script>
         <script src="{%static 'business/js/jquery.magnific-popup.min.js' %}"></script>
@@ -258,5 +241,29 @@
                   }	      	
             });
             </script>
-    </body>
+</body>
 </html>
+
+<!-- <section>						
+    <div class="row mb-4">
+        <header class="mb-4"><b><h2 class="tm-text-shadow"  style="width:100%;"><img src="{%static 'business/img/Logo.png' %}" width="100" alt="Image">Zetone App.</h2></b></header>	
+    </div>
+    <div>
+        <div class="media tm-bg-transparent-black tm-border-white">
+            <div class="media-body" style="text-align: center;">
+                <h3>Ingresar</h3>
+                <form action="" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="user" name="user" class="form-control" placeholder="User" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn tm-btn-submit tm-btn ml-auto" style="width:100%;">Entrar</button>
+                    </div>
+                </form>		
+            </div>
+        </div>          		
+    </div>
+</section>-->
