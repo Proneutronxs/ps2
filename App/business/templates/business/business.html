@@ -43,26 +43,76 @@
 				<button id="tmMainNavToggle" class="menu-icon">&#9776;</button>
 				<div class="inner">
 					<nav class="navegador">
-						<ul>
+						<ul style="margin-left: 0;">
 							<li>
                                 <a href="{% url 'business' %}">
                                     {% if business == "business" %}
-									<i class="fas fa-home tm-nav-fa-icon" style="color: #01a7e1;"></i>
-									<span style="color: #01a7e1;">Zetone</span>
+									<span style="color: #01a7e1;">Home</span>
                                     {% else %}
-                                    <i class="fas fa-home tm-nav-fa-icon"></i>
-									<p>Zetone</p>
+									<p>Home</p>
+                                    {% endif %}
+								</a>
+							</li>
+                            <li>
+                                <a href="{% url 'administracion' %}">
+                                    {% if administracion == "administracion" %}
+									<span style="color: #01a7e1;">Administración</span>
+                                    {% else %}
+									<p>Administración</p>
+                                    {% endif %}
+								</a>
+							</li>
+                            <li>
+                                <a href="{% url 'calidad' %}">
+                                    {% if calidad == "calidad" %}
+									<span style="color: #01a7e1;">Calidad</span>
+                                    {% else %}
+									<p>Calidad</p>
+                                    {% endif %}
+								</a>
+							</li>
+                            <li>
+                                <a href="{% url 'cargas' %}">
+									{% if cargas == "cargas" %}
+									<span style="color: #01a7e1;" id="btn_save">Cargas</span>
+                                    {% else %}
+									<p>Cargas</p>
                                     {% endif %}
 								</a>
 							</li>
                             <li>
                                 <a href="{% url 'empaque' %}">
 									{% if empaque == "empaque" %}
-                                    <i class="fas fa-map tm-nav-fa-icon" style="color: #01a7e1;"></i>
-									<span style="color: #01a7e1;">Empaque</span>
+									<span style="color: #01a7e1;" id="btn_save">Empaque</span>
                                     {% else %}
-                                    <i class="fas fa-map tm-nav-fa-icon"></i>
 									<p>Empaque</p>
+                                    {% endif %}
+								</a>
+							</li>
+                            <li>
+                                <a href="{% url 'deposito' %}">
+									{% if deposito == "deposito" %}
+									<span style="color: #01a7e1;" id="btn_save">Depósito</span>
+                                    {% else %}
+									<p>Depósito</p>
+                                    {% endif %}
+								</a>
+							</li>
+                            <li>
+                                <a href="{% url 'chacras' %}">
+									{% if chacras == "chacras" %}
+									<span style="color: #01a7e1;" id="btn_save">Chacras</span>
+                                    {% else %}
+									<p>Chacras</p>
+                                    {% endif %}
+								</a>
+							</li>
+                            <li>
+                                <a href="{% url 'sistemas' %}">
+									{% if sistemas == "sistemas" %}
+									<span style="color: #01a7e1;" id="btn_save">Sistemas</span>
+                                    {% else %}
+									<p>Sistemas</p>
                                     {% endif %}
 								</a>
 							</li>
@@ -83,12 +133,21 @@
                 <footer class="footer-link">
                     {% if request.user.is_authenticated %}
 					    <li class="tm-copyright-text"><a href="{% url 'logout' %}" style="color: red;">SALIR</a><h6>{{user.username | upper}}</h6></b></li><br>
+                        {% csrf_token %}
+                        <script>
+                            var data = {username: '{{user.username}}'}
+                            fetch('http://10.32.26.49:8000/business/zetone/empaque/', {
+                                body: JSON.stringify(data),
+                            });
+                        </script>
 				    {% endif %}
                     <p class="tm-copyright-text"><img src="{%static 'business/img/psfinal.png' %}" width="30" alt="Image">2022 Josué Chambí 
-                    - Proneutronxs</p>
+                    - Proneutronxs - Beta</p>
                 </footer>
             </div>
 		</div>
+
+        
 
         <script src="{%static 'business/js/jquery-3.2.1.min.js' %}"></script>
         <script src="{%static 'business/js/jquery.magnific-popup.min.js' %}"></script>

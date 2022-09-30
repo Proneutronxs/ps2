@@ -11,7 +11,14 @@ urlpatterns = [
     
     
 
-    ### ZETONE
+    ### ADMINISTRACIÓN
+    path('zetone/administracion/', views.administracion, name="administracion"),
+
+    ### CALIDAD
+    path('zetone/calidad/', views.calidad, name="calidad"),
+
+    ### CARGAS
+    path('zetone/cargas/', views.cargas, name="cargas"),
 
     ### EMPAQUE
     path('zetone/empaque/', views.empaque, name="empaque"),
@@ -23,6 +30,16 @@ urlpatterns = [
     path('zetone/empaque/rondin/newsereno', views.newSereno, name="newsereno"),
     path('zetone/empaque/rondin/viewRecords', views.verRegistros, name="viewrecords"),
     path('zetone/empaque/rondin/export', views.exportRondin, name="exportRondin"),
+
+
+    ### DEPÓSITO
+    path('zetone/deposito/', views.deposito, name="deposito"),
+
+    ### CHACRAS
+    path('zetone/chacras/', views.chacras, name="chacras"),
+
+    ### SISTEMAS
+    path('zetone/sistemas/', views.sistemas, name="sistemas"),
 
     ### API
 

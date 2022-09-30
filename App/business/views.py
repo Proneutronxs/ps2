@@ -23,6 +23,7 @@ def index(request):
 
 @login_required
 def business(request):
+    
     variable = "business"
     return render(request,'business/business.html', {'business': variable})
 
@@ -31,10 +32,32 @@ def business(request):
 def login_entrar(request):
     return render(request,'business/registration/login.html')
 
+
+### ZONA ADMINISTRACIÓN
+@login_required
+def administracion(request):
+    variable = "administracion"
+    return render(request,'business/administracion/administracion.html', {'business': variable, 'administracion': variable})
+
+###ZONA CALIDAD
+
+@login_required
+def calidad(request):
+    variable = "calidad"
+    return render(request,'business/calidad/calidad.html', {'business': variable, 'calidad': variable})
+
+### ZONA CARGAS
+
+@login_required
+def cargas(request):
+    variable = "cargas"
+    return render(request,'business/cargas/cargas.html', {'business': variable, 'cargas': variable})
+
 ### ZONA EMPAQUE ###
 
 @login_required
 def empaque(request):
+    print(request.GET.get('body'))
     variable = "empaque"
     return render(request,'business/empaque/empaque.html', {'business': variable, 'empaque': variable})
 
@@ -83,8 +106,6 @@ def verRegistros(request):
                 return render(request,'business/empaque/rondin/errorRondin.html', {'error': lista})
         except Exception as e:
             lista = [e]
-            print (e)
-            print(lista)
             return render(request,'business/empaque/rondin/errorRondin.html', {'error': lista})
     else:
         variable = "empaque"
@@ -199,9 +220,28 @@ def newSereno(request):
         variable = "empaque"
         return render(request,'business/empaque/rondin/newsereno.html', {'business': variable, 'empaque': variable})
 
-#def insertSereno(request):
- 
 
+
+### ZONA DEÓSITO
+
+@login_required
+def deposito(request):
+    variable = "deposito"
+    return render(request,'business/deposito/deposito.html', {'business': variable, 'deposito': variable})
+
+### ZONA CHACRAS
+
+@login_required
+def chacras(request):
+    variable = "chacras"
+    return render(request,'business/chacras/chacras.html', {'business': variable, 'chacras': variable})
+ 
+### ZONA SISTEMAS
+
+@login_required
+def sistemas(request):
+    variable = "sistemas"
+    return render(request,'business/sistemas/sistemas.html', {'business': variable, 'sistemas': variable})
 
 
 ##### FUNCIONES DE COMPROBACIÓN #####
