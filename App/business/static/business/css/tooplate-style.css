@@ -217,7 +217,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 .tm-btn-submit {
-    border-radius: 0;
+    border-radius: 10px;
     display: block;
     padding: 15px 43px;
 }
