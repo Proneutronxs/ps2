@@ -90,15 +90,6 @@
 								</a>
 							</li>
                             <li>
-                                <a href="{% url 'deposito' %}">
-									{% if deposito == "deposito" %}
-									<span style="color: #01a7e1;" id="btn_save">Depósito</span>
-                                    {% else %}
-									<p>Depósito</p>
-                                    {% endif %}
-								</a>
-							</li>
-                            <li>
                                 <a href="{% url 'chacras' %}">
 									{% if chacras == "chacras" %}
 									<span style="color: #01a7e1;" id="btn_save">Chacras</span>
@@ -116,6 +107,13 @@
                                     {% endif %}
 								</a>
 							</li>
+                            {% if request.user.is_authenticated %}
+                                <li>
+                                    <a href="{% url 'logout' %}">
+                                        <b><p>Salir</p></b>
+                                    </a>
+                                </li>
+                            {% endif %}
 						</ul>
 					</nav>
 				</div>
@@ -123,16 +121,19 @@
             
             <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 tm-content" style="background-color: rgba(0, 0, 0, 0.575);">
                 {% block content %}
-                    <section id="tm-section-1" class="tm-section">
-                        <div class="ml-auto">
-                            <header class="mb-4"><b><h1 class="tm-text-shadow"><img src="{%static 'business/img/Logo.png' %}" width="100" alt="Image">EMPRESA ZETONE</h1></b></header>
-                            
-                        </div>
-                    </section>
+                <section>
+                    <div class="ml-auto">
+                        <header class="mb-4"><b><h1 class="tm-text-shadow"><img src="{%static 'business/img/Logo.png' %}" width="100" alt="Image">EMPRESA ZETONE</h1></b></header>
+                    </div>
+                    <div>
+                        <h6>Accesibilidad desde cualquier parte.&nbsp;&nbsp;&nbsp;&nbsp;<img src="{%static 'business/img/tierra.gif' %}" alt="" width="60" style="border-radius: 50%;"></h6>
+                        
+                    </div>
+                </section>
                 {% endblock %}
                 <footer class="footer-link">
                     {% if request.user.is_authenticated %}
-					    <li class="tm-copyright-text"><a href="{% url 'logout' %}" style="color: red;">SALIR</a><h6>{{user.username | upper}}</h6></b></li><br>
+					    <li class="tm-copyright-text"><h6>{{user.username | upper}}</h6></b></li><br>
                         {% csrf_token %}
                         <script>
                             var data = {username: '{{user.username}}'}
@@ -142,7 +143,7 @@
                         </script>
 				    {% endif %}
                     <p class="tm-copyright-text"><img src="{%static 'business/img/psfinal.png' %}" width="30" alt="Image">2022 Josué Chambí 
-                    - Proneutronxs - Beta</p>
+                    - Proneutronxs - BETA</p>
                 </footer>
             </div>
 		</div>
