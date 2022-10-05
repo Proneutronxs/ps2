@@ -2,7 +2,7 @@ from django.urls import path
 from App.ps import views
 
 urlpatterns = [
-    path('', views.index, name="index"),
+    path('', views.index, name="indexps"),
     path('project', views.project, name="project"),
     path('detail/<int:id>', views.detail, name="detail"),
     path('api', views.consumoApi, name="consumoApi"),
