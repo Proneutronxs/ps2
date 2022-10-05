@@ -69,6 +69,7 @@ p:last-child { margin-bottom: 0; }
 .tm-bg-transparent-black {
     background-color: rgba(0, 0, 0, 0.164);    
     padding: 30px;
+    border-radius: 10px;
 }
 
 .tm-contact-box-pad { padding: 60px 55px; }
