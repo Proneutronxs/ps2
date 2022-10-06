@@ -52,6 +52,6 @@ urlpatterns = [
     ### API
 
     path('prueba', views.consulta, name="consulta"),
-    path('save/point/sereno=<str:sereno>&planta=<str:planta>&punto=<str:punto>&fecha=<str:fecha>&hora=<str:hora>', views.insert_Punto, name="insert_point"),
+    path('api/rondin/save/point/sereno=<str:sereno>&planta=<str:planta>&punto=<str:punto>&fecha=<str:fecha>&hora=<str:hora>', views.insert_Punto, name="insert_point"),
 
 ]

@@ -74,7 +74,7 @@ def consulta(self):
 ### INSERT DE PUNTO DE PUNTO DE CONTROL
 
 #URL: save/point/sereno=<str:sereno>&planta=<str:planta>&punto=<str:punto>&fecha=<str:fecha>&hora=<str:hora>
-## save/point/sereno=4992&planta=1&punto=ZT-238-PZ&fecha=2022-09-21&hora=13:06:55
+## api/rondin/save/point/sereno=4992&planta=1&punto=ZT-238-PZ&fecha=2022-09-21&hora=13:06:55
 def insert_Punto(self, sereno, planta, punto, fecha, hora):
     estado = 0
     variables = [sereno, planta, punto, fecha, hora, estado]
