@@ -1,21 +1,25 @@
-from contextlib import redirect_stderr
-from email.mime import audio
+
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-import json
 from datetime import datetime
 from ps.conexion import *
-from xhtml2pdf import pisa
+from ps.permissions import *
 from django.template.loader import get_template
 
 ##LOGIN
 from django.contrib.auth.decorators import login_required
-from  django.contrib.auth import logout
 
 
 ### ZONA SISTEMAS
 
 @login_required
 def sistemas(request):
-    variable = "sistemas"
-    return render(request,'business/sistemas/sistemas.html', {'business': variable, 'sistemas': variable})
+    usr_permisos = user_General(request.user)
+    if usr_permisos['sistemas'] == 1:
+        permissions = 1
+        area_permisos = p_sistemas(usr_permisos['id'])
+        variable = "sistemas"
+        return render(request,'business/sistemas/sistemas.html', {'business': variable, 'sistemas': variable, 'permiso': permissions, 'permisos': area_permisos})
+    else:
+        permissions = 0
+        variable = "sistemas"
+        return render(request,'business/sistemas/sistemas.html', {'business': variable, 'sistemas': variable, 'permiso': permissions})

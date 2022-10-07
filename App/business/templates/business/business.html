@@ -134,15 +134,8 @@
                 <footer class="footer-link">
                     {% if request.user.is_authenticated %}
 					    <li class="tm-copyright-text"><h6>{{user.username | upper}}</h6></b></li><br>
-                        {% csrf_token %}
-                        <script>
-                            var data = {username: '{{user.username}}'}
-                            fetch('http://10.32.26.49:8000/business/zetone/empaque/', {
-                                body: JSON.stringify(data),
-                            });
-                        </script>
 				    {% endif %}
-                    <p class="tm-copyright-text"><img src="{%static 'business/img/psfinal.png' %}" width="30" alt="Image">2022 Josué Chambí 
+                    <p class="tm-copyright-text"><img src="{%static 'business/img/psfinal.png' %}" width="30" alt="Image" style="background-color: rgba(255, 255, 255, 0.274); border-radius: 25%;">2022 Josué Chambí 
                     - Proneutronxs - BETA</p>
                 </footer>
             </div>

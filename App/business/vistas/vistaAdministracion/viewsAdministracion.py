@@ -5,6 +5,7 @@ from django.http import HttpResponse, JsonResponse
 import json
 from datetime import datetime
 from ps.conexion import *
+from ps.permissions import *
 from xhtml2pdf import pisa
 from django.template.loader import get_template
 
@@ -16,5 +17,13 @@ from  django.contrib.auth import logout
 ### ZONA ADMINISTRACIÓN
 @login_required
 def administracion(request):
-    variable = "administracion"
-    return render(request,'business/administracion/administracion.html', {'business': variable, 'administracion': variable})
+    usr_permisos = user_General(request.user)
+    if usr_permisos['admin'] == 1:
+        permissions = 1
+        area_permisos = p_admin(usr_permisos['id'])
+        variable = "administracion"
+        return render(request,'business/administracion/administracion.html', {'business': variable, 'administracion': variable, 'permiso': permissions, 'permisos': area_permisos})
+    else:
+        permissions = 0
+        variable = "administracion"
+        return render(request,'business/administracion/administracion.html', {'business': variable, 'administracion': variable, 'permiso': permissions})

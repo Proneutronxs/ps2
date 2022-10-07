@@ -8,18 +8,46 @@
     <div class="row mb-4">
         <header class="mb-4"><b><h2 class="tm-text-shadow"><img src="{%static 'business/img/Logo.png' %}" width="100" alt="Image">Cargas</h2></b></header>	
     </div>
-    <div class="row">
-
-        <div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
-            <div class="media tm-bg-transparent-black tm-border-white">
-                <div class="media-body" style="text-align: center;">
-                    <h3>Cargas</h3>
-                    <a href="#" class="btn tm-btn-submit tm-btn ml-auto" style="width:30%;">&#10145;</a>	
+    {% if permiso == 1 %}
+        <div class="row">
+            {% if permisos.moduloCG1 == 1%}
+                <div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
+                    <div class="media tm-bg-transparent-black tm-border-white">
+                        <div class="media-body" style="text-align: center;">
+                            <h3>Módulo 1</h3>
+                            <a href="#" class="btn tm-btn-submit tm-btn ml-auto" style="width:30%;">&#10145;</a>	
+                        </div>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
+            {% if permisos.moduloCG2 == 1%}
+                <div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
+                    <div class="media tm-bg-transparent-black tm-border-white">
+                        <div class="media-body" style="text-align: center;">
+                            <h3>Módulo 2</h3>
+                            <a href="#" class="btn tm-btn-submit tm-btn ml-auto" style="width:30%;">&#10145;</a>	
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if permisos.moduloCG3 == 1%}
+                <div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
+                    <div class="media tm-bg-transparent-black tm-border-white">
+                        <div class="media-body" style="text-align: center;">
+                            <h3>Módulo 3</h3>
+                            <a href="#" class="btn tm-btn-submit tm-btn ml-auto" style="width:30%;">&#10145;</a>	
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </div>
+    {% else %}
 
+    <div>
+        <h4>No tiene permisos para acceder al área de Cargas.</h4>
     </div>
+
+    {% endif %}
 </section>
 
 

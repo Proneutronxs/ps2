@@ -1,10 +1,10 @@
-from contextlib import redirect_stderr
-from email.mime import audio
+
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import json
 from datetime import datetime
 from ps.conexion import *
+from ps.permissions import *
 from xhtml2pdf import pisa
 from django.template.loader import get_template
 
@@ -17,9 +17,16 @@ from  django.contrib.auth import logout
 
 @login_required
 def empaque(request):
-    print(request.GET.get('body'))
-    variable = "empaque"
-    return render(request,'business/empaque/empaque.html', {'business': variable, 'empaque': variable})
+    usr_permisos = user_General(request.user)
+    if usr_permisos['empaque'] == 1:
+        permissions = 1
+        area_permisos = p_empaque(usr_permisos['id'])
+        variable = "empaque"
+        return render(request,'business/empaque/empaque.html', {'business': variable, 'empaque': variable, 'permiso': permissions, 'permisos': area_permisos})
+    else:
+        permissions = 0
+        variable = "empaque"
+        return render(request,'business/empaque/empaque.html', {'business': variable, 'empaque': variable, 'permiso': permissions})
 
 ############## ZONA RONDÍN
 
