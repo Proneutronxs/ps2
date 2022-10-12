@@ -1,6 +1,7 @@
 from django.urls import path
 from App.business import views
-from django.contrib.auth.views import LogoutView
+from App.business.forms import *
+
 
 from App.business.vistas.vistaSistemas import viewsSistemas
 from App.business.vistas.vistaEmpaque import viewsEmpaque
@@ -46,12 +47,16 @@ urlpatterns = [
 
     ### SISTEMAS
     path('zetone/sistemas/', viewsSistemas.sistemas, name="sistemas"),
+    path('zetone/sistemas/usuarios/', viewsSistemas.usuarios, name="usuarios"),
+    path('zetone/sistemas/usuarios/newuser', viewsSistemas.newuser, name="newuser"),
+    ##path('zetone/sistemas/usuarios/newuser', viewsSistemas.newuser(template_name='business/sitemas/usuarios/newuser.html'), name="newuser"),
+    ##path('zetone/sistemas/usuarios/newuser', viewsSistemas.newuser, name="newuser"),LoginView.as_view(template_name='business/registration/login.html')
+
 
     
     
     ### API
 
     path('prueba', views.consulta, name="consulta"),
-    path('api/rondin/save/point/sereno=<str:sereno>&planta=<str:planta>&punto=<str:punto>&fecha=<str:fecha>&hora=<str:hora>', views.insert_Punto, name="insert_point"),
-
+    path('save/point/sereno=<str:sereno>&planta=<str:planta>&punto=<str:punto>&fecha=<str:fecha>&hora=<str:hora>', views.insert_Punto, name="insert_point"),
 ]
