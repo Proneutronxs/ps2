@@ -42,11 +42,11 @@ def ps_Rondin():
         print(e)
         print("EXCEPT - CONEXIÓN.PY") 
 
-ps_db_Rondin = 'Permisos'
+ps_db_Permisos = 'Permisos'
 
 def ps_Permisos():
     try:
-        ps_Rondin = mysql.connector.connect(host = ps_server, port = ps_port, user = ps_user, password = ps_psw, db = ps_db_Rondin)
+        ps_Rondin = mysql.connector.connect(host = ps_server, port = ps_port, user = ps_user, password = ps_psw, db = ps_db_Permisos)
         return ps_Rondin
     except Exception as e:
         print(e)
