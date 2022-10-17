@@ -9,8 +9,8 @@ zt_psw = 'Sideswipe348'
 
 ###SERVIDOR PRONEUTRONXS
 ps_server = 'localhost'
-ps_user = 'psphpmyadminps'
-ps_psw = 'Proneutronxs$%Sideswipe$%1722'
+ps_user = 'Sideswipe'
+ps_psw = 'Sideswipe348'
 ps_port = '3306'
 
 
@@ -27,6 +27,16 @@ def SQLRondin():
         print(e)
         print("EXCEPT - CONEXIÓN.PY") 
 
+db_SQLRoca5_Zetoneapp = 'master'
+
+def SQLRoca5():
+    try:
+        Roca5 = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server}; SERVER=' + zt_server +'; DATABASE=' + db_SQLRoca5_Zetoneapp + '; UID=' + zt_user + '; PWD=' + zt_psw)
+        return Roca5
+    except Exception as e: 
+        print(e)
+        print("EXCEPT - CONEXIÓN.PY")
+
 
 
 ###CONEXIONES SERVIDOR PRONEUTRONXS
@@ -42,12 +52,14 @@ def ps_Rondin():
         print(e)
         print("EXCEPT - CONEXIÓN.PY") 
 
-ps_db_Permisos = 'Permisos'
+ps_db_permisos = 'Permisos'
 
 def ps_Permisos():
     try:
-        ps_Rondin = mysql.connector.connect(host = ps_server, port = ps_port, user = ps_user, password = ps_psw, db = ps_db_Permisos)
-        return ps_Rondin
+        ps_permisos = mysql.connector.connect(host = ps_server, port = ps_port, user = ps_user, password = ps_psw, db = ps_db_permisos)
+        return ps_permisos
     except Exception as e:
         print(e)
         print("EXCEPT - CONEXIÓN.PY")
+
+
