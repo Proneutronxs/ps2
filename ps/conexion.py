@@ -49,8 +49,10 @@ def ps_Rondin():
         ps_Rondin = mysql.connector.connect(host = ps_server, port = ps_port, user = ps_user, password = ps_psw, db = ps_db_Rondin)
         return ps_Rondin
     except Exception as e:
+        
         print(e)
         print("EXCEPT - CONEXIÓN.PY") 
+        return e
 
 ps_db_permisos = 'Permisos'
 

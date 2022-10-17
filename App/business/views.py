@@ -6,7 +6,6 @@ import json
 from datetime import datetime
 from ps.conexion import *
 from ps.permissions import *
-from xhtml2pdf import pisa
 from django.template.loader import get_template
 
 ##LOGIN
@@ -93,7 +92,7 @@ def insert_Punto(self, sereno, planta, punto, fecha, hora):
     except Exception as e:
         print(e)
         respuesta = 'Error'
-        lista_estado= [{'Info':e}]
+        lista_estado= [{'Info':e, 'Info2': Rondin}]
         estado = [lista_estado]
         return HttpResponse(estado)
 
