@@ -49,6 +49,8 @@ urlpatterns = [
     path('zetone/sistemas/', viewsSistemas.sistemas, name="sistemas"),
     path('zetone/sistemas/usuarios/', viewsSistemas.usuarios, name="usuarios"),
     path('zetone/sistemas/usuarios/newuser', viewsSistemas.newuser, name="newuser"),
+    path('zetone/sistemas/periodos/', viewsSistemas.periodos, name="periodos"),
+    path('zetone/sistemas/periodos/habilitar', viewsSistemas.habilitar_periodos, name="habilitar"),
     ##path('zetone/sistemas/usuarios/newuser', viewsSistemas.newuser(template_name='business/sitemas/usuarios/newuser.html'), name="newuser"),
     ##path('zetone/sistemas/usuarios/newuser', viewsSistemas.newuser, name="newuser"),LoginView.as_view(template_name='business/registration/login.html')
 
@@ -59,4 +61,5 @@ urlpatterns = [
 
     path('prueba', views.consulta, name="consulta"),
     path('save/point/sereno=<str:sereno>&planta=<str:planta>&punto=<str:punto>&fecha=<str:fecha>&hora=<str:hora>', views.insert_Punto, name="insert_point"),
+
 ]
