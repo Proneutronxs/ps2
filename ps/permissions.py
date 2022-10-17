@@ -5,6 +5,7 @@ from ps.conexion import ps_Permisos
 
 def user_General(user):
     permisos = ps_Permisos()
+    print(user)
     try:
         cursor = permisos.cursor()
         c_user = ("SELECT id, usr, usr_administracion, usr_calidad, usr_cargas, usr_empaque, usr_chacras, usr_sistemas FROM `Usuarios` WHERE usr = '"+str(user)+"'")

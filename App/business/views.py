@@ -93,7 +93,7 @@ def insert_Punto(self, sereno, planta, punto, fecha, hora):
     except Exception as e:
         print(e)
         respuesta = 'Error'
-        lista_estado= [{'Info':respuesta}]
+        lista_estado= [{'Info':e}]
         estado = [lista_estado]
         return HttpResponse(estado)
 

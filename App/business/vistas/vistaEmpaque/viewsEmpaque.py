@@ -17,8 +17,8 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def empaque(request):
     print(request.user)
-    usr_permisos = user_General("Sideswipe")
-    if (usr_permisos['empaque']) == 1:
+    usr_permisos = user_General(request.user)
+    if usr_permisos['empaque'] == 1:
         permissions = 1
         area_permisos = p_empaque(usr_permisos['id'])
         variable = "empaque"
