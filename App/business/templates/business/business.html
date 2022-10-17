@@ -132,10 +132,8 @@
                 </section>
                 {% endblock %}
                 <footer class="footer-link">
-                    {% if request.user.is_authenticated %}
 					    <li class="tm-copyright-text"><h6>{{user.username | upper}}</h6></b></li><br>
-				    {% endif %}
-                    <p class="tm-copyright-text"><img src="{%static 'business/img/psfinal.png' %}" width="30" alt="Image" style="background-color: rgba(255, 255, 255, 0.274); border-radius: 25%;">2022 Josué Chambí 
+                    <p class="tm-copyright-text"><img src="{%static 'business/img/psfinal.png' %}" width="30" alt="Image" style="background-color: rgba(255, 255, 255, 0.274); border-radius: 45px 10px 80px 25px;">2022 Josué Chambí 
                     - Proneutronxs - BETA</p>
                 </footer>
             </div>
@@ -147,7 +145,6 @@
         <script src="{%static 'business/js/jquery.magnific-popup.min.js' %}"></script>
         <script src="{%static 'business/js/jquery.backstretch.min.js' %}"></script>
         <script src="{%static 'business/slick/slick.min.js' %}"></script>
-        <!--<script src="{%static 'ps/js/custom.js' %}"></script>-->
         <script>
 
             var sidebarVisible = false;

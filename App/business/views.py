@@ -5,6 +5,7 @@ from django.http import HttpResponse, JsonResponse
 import json
 from datetime import datetime
 from ps.conexion import *
+from ps.permissions import *
 from xhtml2pdf import pisa
 from django.template.loader import get_template
 
@@ -23,7 +24,6 @@ def index(request):
 
 @login_required
 def business(request):
-    
     variable = "business"
     return render(request,'business/business.html', {'business': variable})
 
@@ -74,7 +74,7 @@ def consulta(self):
 ### INSERT DE PUNTO DE PUNTO DE CONTROL
 
 #URL: save/point/sereno=<str:sereno>&planta=<str:planta>&punto=<str:punto>&fecha=<str:fecha>&hora=<str:hora>
-## api/rondin/save/point/sereno=4992&planta=1&punto=ZT-238-PZ&fecha=2022-09-21&hora=13:06:55
+## save/point/sereno=4992&planta=1&punto=ZT-238-PZ&fecha=2022-09-21&hora=13:06:55
 def insert_Punto(self, sereno, planta, punto, fecha, hora):
     estado = 0
     variables = [sereno, planta, punto, fecha, hora, estado]
@@ -93,7 +93,7 @@ def insert_Punto(self, sereno, planta, punto, fecha, hora):
     except Exception as e:
         print(e)
         respuesta = 'Error'
-        lista_estado= [{'Info': e}]
+        lista_estado= [{'Info':respuesta}]
         estado = [lista_estado]
         return HttpResponse(estado)
 

@@ -1,7 +1,10 @@
 from pyexpat import model
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User 
+from django.contrib.auth.models import User
+from requests import request
+
+from App.business.models import models_accion_periodo 
 
 
 class UserRegisterForm(UserCreationForm):
@@ -18,3 +21,15 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'password1', 'password2', 'last_name', 'first_name']
         help_texts = {k:"" for k in fields}
+
+class accion_periodo(forms.ModelForm):
+
+    desde = forms.DateField()
+    empresa = forms.CharField()
+    accion = forms.CharField()
+
+    class Meta:
+        model = models_accion_periodo
+        fields = ['desde', 'empresa', 'accion']
+    
+   
