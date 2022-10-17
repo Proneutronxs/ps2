@@ -10,6 +10,6 @@ urlpatterns = [
     path('contact', views.contact, name="contact"),
 
 
-    ##Prueba Rondin
-    ####path('search', views.sqlQuery, name="search"),
+    #Prueba Rondin
+    path('search', views.sqlQuery, name="search"),
 ]

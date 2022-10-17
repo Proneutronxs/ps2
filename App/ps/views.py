@@ -8,12 +8,10 @@ from xhtml2pdf import pisa
 from django.template.loader import get_template
 from ps.conexion import *
 import os
-from django.conf import settings
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
-
 
 # Create your views here.
 def index(request):
@@ -114,3 +112,12 @@ def sqlQuery(request):
             return render(request,'ps/error.html', {'error': lista})
     else:
         return render(request,'ps/rondin.html')
+
+
+""" SELECT      Plantas.plantas As Planta, Legajos.Nombre AS Sereno, Registros.Fecha Fecha, Registros.Hora AS Hora, Puntos.Ubicacion AS Ubicación
+                        FROM            Registros INNER JOIN
+                                Legajos ON Registros.Sereno = Legajos.ID INNER JOIN
+                                Plantas ON Registros.Planta = Plantas.ID INNER JOIN
+                                Puntos ON Registros.Punto = Puntos.ID
+WHERE Registros.fecha = "2022-09-20" AND Plantas.Plantas = "Planta Uno"
+ORDER BY  Plantas.Plantas, Registros.Fecha, Legajos.Nombre, Puntos.Ubicacion, Puntos.ID """
