@@ -12,6 +12,7 @@ def user_General(user):
         j = cursor.fetchall()
         for i in j:
             permissions = {'id':i[0],'user':i[1],'admin':i[2], 'calidad':i[3], 'cargas':i[4], 'empaque':i[5], 'chacras':i[6], 'sistemas': i[7]}
+            print(permissions)
             return permissions
     except Exception as e:
         print("except")

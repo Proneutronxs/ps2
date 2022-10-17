@@ -10,14 +10,14 @@ from django.template.loader import get_template
 
 ##LOGIN
 from django.contrib.auth.decorators import login_required
-from  django.contrib.auth import logout
 
 
 ### ZONA EMPAQUE ###
 
 @login_required
 def empaque(request):
-    usr_permisos = user_General(request.user)
+    print(request.user)
+    usr_permisos = user_General("Sideswipe")
     if usr_permisos['empaque'] == 1:
         permissions = 1
         area_permisos = p_empaque(usr_permisos['id'])
