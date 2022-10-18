@@ -53,7 +53,7 @@ def verRegistros(request):
                                 "Plantas ON Registros.Planta = Plantas.ID INNER JOIN\n" +
                                 "Puntos ON Registros.Punto = Puntos.ID\n" +
                         "WHERE Registros.fecha BETWEEN '"+ start +"' AND '"+ end +"' AND Plantas.Planta = '"+ planta +"'\n" +
-                        "ORDER BY  Plantas.Planta, Registros.Fecha, Legajos.Nombre, Puntos.Ubicacion, Puntos.ID")
+                        "ORDER BY  Plantas.Planta, Registros.Fecha") ###, Legajos.Nombre, Puntos.Ubicacion, Puntos.ID
             cursor_export.execute(sqlQuery)
             datos = cursor_export.fetchall()
             if datos:
