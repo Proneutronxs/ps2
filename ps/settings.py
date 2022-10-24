@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'ps.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Django',
+        'USER': 'psphpmyadminps',
+        'PASSWORD': 'Proneutronxs$%Sideswipe$%1722',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
