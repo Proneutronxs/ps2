@@ -30,14 +30,14 @@ def administracion(request):
 @login_required
 def periodos(request):
     usr_permisos = user_General(request.user)
-    if usr_permisos['sistemas'] == 1:
+    if usr_permisos['admin'] == 1:
         permissions = 1
-        variable = "sistemas"
-        return render(request,'business/administracion/contable/periodos/periodos.html', {'business': variable, 'sistemas': variable, 'permiso': permissions})
+        variable = "administracion"
+        return render(request,'business/administracion/contable/periodos/periodos.html', {'business': variable, 'administracion': variable, 'permiso': permissions})
     else:
         permissions = 0
-        variable = "sistemas"
-        return render(request,'business/administracion/contable/periodos/periodos.html', {'business': variable, 'sistemas': variable, 'permiso': permissions})
+        variable = "administracion"
+        return render(request,'business/administracion/contable/periodos/periodos.html', {'business': variable, 'administracion': variable, 'permiso': permissions})
 
 
 
@@ -71,7 +71,7 @@ def empresa_activa(empresa):
 @login_required
 def habilitar_periodos(request):
     usr_permisos = user_General(request.user)
-    if usr_permisos['sistemas'] == 1:
+    if usr_permisos['admin'] == 1:
         permissions = 1
         if request.method == 'POST':
             form = accion_periodo(request.POST)
@@ -82,12 +82,12 @@ def habilitar_periodos(request):
                 business = empresa_activa(form.cleaned_data['empresa'])
                 if form.cleaned_data['accion'] == "Acción":
                     message = "Selecione la acción a ejecutar."
-                    variable = "sistemas"
-                    return render(request,'business/sistemas/periodos/habilitarperiodo.html', {'business': variable, 'sistemas': variable, 'permiso': permissions, 'form': form, 'message': message})
+                    variable = "administracion"
+                    return render(request,'business/sistemas/periodos/habilitarperiodo.html', {'business': variable, 'administracion': variable, 'permiso': permissions, 'form': form, 'message': message})
                 elif form.cleaned_data['empresa'] == "Empresa":
                     message = "Selecione la Empresa."
-                    variable = "sistemas"
-                    return render(request,'business/sistemas/periodos/habilitarperiodo.html', {'business': variable, 'sistemas': variable, 'permiso': permissions, 'form': form, 'message': message})
+                    variable = "administracion"
+                    return render(request,'business/sistemas/periodos/habilitarperiodo.html', {'business': variable, 'administracion': variable, 'permiso': permissions, 'form': form, 'message': message})
                 else:
                     if form.cleaned_data['accion'] == "Habilitar":
                         if month == "01":
@@ -97,8 +97,8 @@ def habilitar_periodos(request):
                             formato_sql = str(year_aplicable) + str(month_aplicable) + str(day_aplicable[1])
                             sql = sql_periodo(formato_sql, business, day_aplicable[1])
                             message =  sql 
-                            variable = "sistemas"
-                            return render(request,'business/sistemas/periodos/habilitarperiodo.html', {'business': variable, 'sistemas': variable, 'permiso': permissions, 'form': form, 'message': message})
+                            variable = "administracion"
+                            return render(request,'business/sistemas/periodos/habilitarperiodo.html', {'business': variable, 'administracion': variable, 'permiso': permissions, 'form': form, 'message': message})
                         else:
                             year_aplicable = int(year)
                             month_aplicable = int(month) - 1
@@ -108,8 +108,8 @@ def habilitar_periodos(request):
                             formato_sql = str(year_aplicable) + str(month_aplicable) + str(day_aplicable[1]) 
                             sql = sql_periodo(formato_sql, business, day_aplicable[1])
                             message =  sql
-                            variable = "sistemas"
-                            return render(request,'business/administracion/contable/periodos/habilitarperiodo.html', {'business': variable, 'sistemas': variable, 'permiso': permissions, 'form': form, 'message': message})                     
+                            variable = "administracion"
+                            return render(request,'business/administracion/contable/periodos/habilitarperiodo.html', {'business': variable, 'administracion': variable, 'permiso': permissions, 'form': form, 'message': message})                     
                     elif form.cleaned_data['accion'] == "Cerrar":
                         day_aplicable = "01"
                         if month == "12":
@@ -118,8 +118,8 @@ def habilitar_periodos(request):
                             formato_sql = str(year_aplicable) + str(month_aplicable) + str(day_aplicable) 
                             sql = sql_periodo(formato_sql, business, day_aplicable[1])
                             message =  sql
-                            variable = "sistemas"
-                            return render(request,'business/administracion/contable/periodos/habilitarperiodo.html', {'business': variable, 'sistemas': variable, 'permiso': permissions, 'form': form, 'message': message})
+                            variable = "administracion"
+                            return render(request,'business/administracion/contable/periodos/habilitarperiodo.html', {'business': variable, 'administracion': variable, 'permiso': permissions, 'form': form, 'message': message})
                         else:
                             year_aplicable = year
                             month_aplicable = int(month) + 1
@@ -128,20 +128,20 @@ def habilitar_periodos(request):
                             formato_sql = str(year_aplicable) + str(month_aplicable) + str(day_aplicable) 
                             sql = sql_periodo(formato_sql, business, day_aplicable[1])
                             message =  sql
-                            variable = "sistemas"
-                            return render(request,'business/administracion/contable/periodos/habilitarperiodo.html', {'business': variable, 'sistemas': variable, 'permiso': permissions, 'form': form, 'message': message})
+                            variable = "administracion"
+                            return render(request,'business/administracion/contable/periodos/habilitarperiodo.html', {'business': variable, 'administracion': variable, 'permiso': permissions, 'form': form, 'message': message})
             else:
                 form = accion_periodo()
                 message = "Selecione las fechas correctamente."
-                variable = "sistemas"
-                return render(request,'business/administracion/contable/periodos/habilitarperiodo.html', {'business': variable, 'sistemas': variable, 'permiso': permissions, 'form': form, 'message': message})
+                variable = "administracion"
+                return render(request,'business/administracion/contable/periodos/habilitarperiodo.html', {'business': variable, 'administracion': variable, 'permiso': permissions, 'form': form, 'message': message})
         else:
             form = accion_periodo()
             permissions = 0
-            variable = "sistemas"
-            return render(request,'business/administracion/contable/periodos/habilitarperiodo.html', {'business': variable, 'sistemas': variable, 'permiso': permissions, 'form': form})
+            variable = "administracion"
+            return render(request,'business/administracion/contable/periodos/habilitarperiodo.html', {'business': variable, 'administracion': variable, 'permiso': permissions, 'form': form})
     else:
         form = accion_periodo()
         permissions = 0
-        variable = "sistemas"
-        return render(request,'business/administracion/contable/periodos/habilitarperiodo.html', {'business': variable, 'sistemas': variable, 'permiso': permissions, 'form': form})
+        variable = "administracion"
+        return render(request,'business/administracion/contable/periodos/habilitarperiodo.html', {'business': variable, 'administracion': variable, 'permiso': permissions, 'form': form})
