@@ -9,10 +9,10 @@ zt_psw = 'Sideswipe348'
 
 ###SERVIDOR PRONEUTRONXS
 ps_server = 'localhost'
-ps_user = 'Sideswipe'
-ps_psw = 'Sideswipe348'
-#ps_user = 'psphpmyadminps'
-#ps_psw = 'Proneutronxs$%Sideswipe$%1722'
+#ps_user = 'Sideswipe'
+#ps_psw = 'Sideswipe348'
+ps_user = 'psphpmyadminps'
+ps_psw = 'Proneutronxs$%Sideswipe$%1722'
 ps_port = '3306'
 
 
