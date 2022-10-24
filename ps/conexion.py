@@ -9,6 +9,8 @@ zt_psw = 'Sideswipe348'
 
 ###SERVIDOR PRONEUTRONXS
 ps_server = 'localhost'
+#ps_user = 'Sideswipe'
+#ps_psw = 'Sideswipe348'
 ps_user = 'psphpmyadminps'
 ps_psw = 'Proneutronxs$%Sideswipe$%1722'
 ps_port = '3306'
@@ -27,7 +29,7 @@ def SQLRondin():
         print(e)
         print("EXCEPT - CONEXIÓN.PY") 
 
-db_SQLRoca5_Zetoneapp = 'master'
+db_SQLRoca5_Zetoneapp = 'Zetoneapp'
 
 def SQLRoca5():
     try:

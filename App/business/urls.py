@@ -20,6 +20,8 @@ urlpatterns = [
 
     ### ADMINISTRACIÓN
     path('zetone/administracion/', viewsAdministracion.administracion, name="administracion"),
+    path('zetone/contable/periodos/', viewsAdministracion.periodos, name="admin_periodos"),
+    path('zetone/contable/periodos/habilitar', viewsAdministracion.habilitar_periodos, name="phabilitar"),
 
     ### CALIDAD
     path('zetone/calidad/', viewsCalidad.calidad, name="calidad"),

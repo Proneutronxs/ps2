@@ -1,0 +1,51 @@
+{% extends "business/business.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section style="width:100%;">						
+    <div class="row mb-4">
+        <header class="mb-4"><b><h2 class="tm-text-shadow"><img src="{%static 'business/img/Logo.png' %}" width="100" alt="Image">Habilitar / Cerrar Período</h2></b></header>	
+    </div>
+        <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-12 col-xl-6 mb-4">
+                    <div class="media tm-bg-transparent-black tm-border-white">
+                        <div class="media-body" style="text-align: center;">
+                            <form action="" method="POST">{% csrf_token %}
+                                {% if message %}
+                                    <b><h6 style="color: white;">{{message}}</h6></b>
+                                {% endif %}
+                                <div class="form-group">
+                                    <label for="desde">Fecha:</label> <br>
+                                    <input type="date" id="desde" name="{{form.desde.name}}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <select class="btn tm-btn-submit tm-btn ml-auto" type="checkbox" id="empresa" name="{{form.empresa.name}}" style="width:100%;">
+                                        <option value="Empresa">Empresa</option>
+                                        <option value="Zetone">Zetone</option>
+                                        <option value="Montever">Montever</option>
+                                        <option value="Fruit World">Fruit World</option>
+                                        <option value="Nyassa">Nyassa</option>
+                                        <option value="Blue-ZT">Blue-ZT</option>
+                                        <option value="Blue-FW">Blue-FW</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="btn tm-btn-submit tm-btn ml-auto" type="checkbox" id="accion" name="{{form.accion.name}}" style="width:100%;">
+                                        <option value="Acción">Acción</option>
+                                        <option value="Habilitar">Habilitar</option>
+                                        <option value="Cerrar">Cerrar</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn tm-btn-submit tm-btn ml-auto" style="width:100%;">Ir</button>
+                                </div>
+                            </form>	
+                        </div>
+                    </div>
+                </div>
+        </div>
+</section>
+
+{% endblock %}

@@ -5,7 +5,6 @@ from ps.conexion import ps_Permisos
 
 def user_General(user):
     permisos = ps_Permisos()
-    print(user)
     try:
         cursor = permisos.cursor()
         c_user = ("SELECT id, usr, usr_administracion, usr_calidad, usr_cargas, usr_empaque, usr_chacras, usr_sistemas FROM `Usuarios` WHERE usr = '"+str(user)+"'")
@@ -13,7 +12,6 @@ def user_General(user):
         j = cursor.fetchall()
         for i in j:
             permissions = {'id':i[0],'user':i[1],'admin':i[2], 'calidad':i[3], 'cargas':i[4], 'empaque':i[5], 'chacras':i[6], 'sistemas': i[7]}
-            print(permissions)
             return permissions
     except Exception as e:
         print("except")
