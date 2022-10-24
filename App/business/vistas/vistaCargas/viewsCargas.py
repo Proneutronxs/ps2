@@ -24,5 +24,6 @@ def cargas(request):
         variable = "cargas"
         return render(request,'business/cargas/cargas.html', {'business': variable, 'cargas': variable, 'permiso': permissions, 'permisos': area_permisos})
     else:
+        permissions = 0
         variable = "cargas"
         return render(request,'business/cargas/cargas.html', {'business': variable, 'cargas': variable, 'permiso': permissions})
