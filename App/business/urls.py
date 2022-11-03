@@ -38,7 +38,7 @@ urlpatterns = [
     path('zetone/empaque/rondin/', viewsEmpaque.rondin, name="rondin"),
     path('zetone/empaque/rondin/newsereno', viewsEmpaque.newSereno, name="newsereno"),
     path('zetone/empaque/rondin/viewRecords', viewsEmpaque.verRegistros, name="viewrecords"),
-    path('zetone/empaque/rondin/export', viewsEmpaque.exportRondin, name="exportRondin"),
+    path('zetone/empaque/rondin/export', viewsEmpaque.exportRondin2, name="exportRondin"),
 
 
     ### DEPÓSITO

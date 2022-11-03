@@ -18,7 +18,7 @@ def sql_periodo(formato_sql, business, day_aplicable):
             retorno = "El período se habilitó correctamente."
             return retorno
 
-    except Exception as retorno:
+    except Exception as retorno2:
         #print(retorno)
-        retorno = "Hubo un error al procesar la solicitud."
+        retorno = "Hubo un error al procesar la solicitud.\n" + retorno2
         return retorno

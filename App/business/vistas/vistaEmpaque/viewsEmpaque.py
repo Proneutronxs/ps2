@@ -1,12 +1,12 @@
 
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-import json
 from datetime import datetime
 from ps.conexion import *
 from ps.permissions import *
 from xhtml2pdf import pisa
 from django.template.loader import get_template
+from App.business.modelsPDF.modelsPDF import modelPDF
 
 ##LOGIN
 from django.contrib.auth.decorators import login_required
@@ -187,3 +187,72 @@ def newSereno(request):
         variable = "empaque"
         return render(request,'business/empaque/rondin/newsereno.html', {'business': variable, 'empaque': variable})
 
+
+@login_required
+def exportRondin2(request):
+    if request.GET.get("start") and request.GET.get("end"):
+        start = request.GET.get("start", 0)
+        end = request.GET.get("end", 1)
+        planta = request.GET.get("planta", 2)
+        formatStart = datetime.strptime(start, "%Y-%m-%d").strftime("%d/%m/%Y")
+        formatEnd = datetime.strptime(end, "%Y-%m-%d").strftime("%d/%m/%Y")
+        logo = 'static/business/img/zt.jpg'
+        now = datetime.now()
+        dia = now.day
+        mes = now.month
+        año = now.year
+        hora = now.time().strftime("%H:%M:%S")
+        fechaActual = str(dia) + str(mes) + str(año)
+        fechaActual2 = str(dia) + "-" + str(mes) + "-" + str(año)
+        try:
+            Rondin = ps_Rondin()        
+            cursor_export = Rondin.cursor()
+            sqlQuery = ("SELECT      Plantas.planta As Planta, Legajos.Nombre AS Sereno, DATE_FORMAT(Fecha, '%d/%m/%Y') AS Fecha, Registros.Hora AS Hora, Puntos.Ubicacion AS Ubicación\n" +
+                        "FROM            Registros INNER JOIN\n" +
+                                "Legajos ON Registros.Sereno = Legajos.ID INNER JOIN\n" +
+                                "Plantas ON Registros.Planta = Plantas.ID INNER JOIN\n" +
+                                "Puntos ON Registros.Punto = Puntos.ID\n" +
+                        "WHERE Registros.fecha BETWEEN '"+ start +"' AND '"+ end +"' AND Plantas.Planta = '"+ planta +"'\n" +
+                        "ORDER BY  Plantas.Planta, Registros.Fecha, Registros.Hora, Legajos.Nombre, Puntos.Ubicacion, Puntos.ID")
+            cursor_export.execute(sqlQuery)
+            datos = cursor_export.fetchall()
+            if datos:
+                lista = []
+                ron = cursor_export.fetchall()
+                for ron in datos:
+                    resultado = {'Planta': ron[0], 'Sereno': ron[1], 'Fecha': ron[2], 'Hora': ron[3], 'Punto': ron[4]}
+                    lista.append(resultado)
+                Rondin.close()
+                datosResult = [{'planta':planta, 'formatStart':formatStart, 'formatEnd':formatEnd, 'logo': logo, 'hora': hora, 'fechaActual2': fechaActual2}]
+                try:
+                    pdf = modelPDF()
+                    pdf.alias_nb_pages()
+                    pdf.add_page()
+                    pdf.set_font('Times', '', 12)
+
+                    for i in range(1, 50):
+                        pdf.cell(0, 10, 'Línea número: ' + str(i), 0, 1)
+
+                    mi_pdf = pdf.output('App/business/modelsPDF/generatorPDF/PRUEBA2.pdf', 'F')
+                    print("HOLA?")
+                    response = HttpResponse(content_type='application/pdf')
+                    response['Content-Disposition'] = mi_pdf
+                    return response
+                except Exception as e:
+                    lista = [e]
+                    print("HOLA EXCEPTION")
+                    print (e)
+                    print(lista)
+                    return render(request,'business/empaque/rondin/errorRondin.html', {'error': lista})
+            else:
+                Rondin.close()
+                lista = ["No existen datos para esa Fecha"]
+                return render(request,'business/empaque/rondin/errorRondin.html', {'error': lista})
+        except Exception as e:
+            lista = [e]
+            print (e)
+            print(lista)
+            return render(request,'business/empaque/rondin/errorRondin.html', {'error': lista})
+    else:
+        variable = "empaque"
+        return render(request,'business/empaque/rondin/exportRondin.html', {'business': variable, 'empaque': variable})
