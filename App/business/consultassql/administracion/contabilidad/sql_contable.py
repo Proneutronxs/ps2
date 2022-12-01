@@ -5,7 +5,7 @@ server_roca5 = SQLRoca5()
 
 def sql_periodo(formato_sql, business, day_aplicable):
 
-    sql = (business, formato_sql)
+    sql = (str(business), str(formato_sql))
     try:
         with server_roca5.cursor() as cursor:
             cursor.execute("sp_usr_periodo ?, ?", sql)
