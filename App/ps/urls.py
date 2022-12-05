@@ -9,7 +9,6 @@ urlpatterns = [
     path('about', views.about1, name="about"),
     path('contact', views.contact, name="contact"),
 
-
     #Prueba Rondin
     path('search', views.sqlQuery, name="search"),
 ]

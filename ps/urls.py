@@ -23,6 +23,7 @@ urlpatterns = [
     path('administracion/de/recursos/de/about/y/project', admin.site.urls),
     path('', include('App.ps.urls')),
     path('business/', include('App.business.urls')),
+    path('vikosur/', include('App.vikosur.urls')),
     
     path('accounts/login/', LoginView.as_view(template_name='business/registration/login.html'), name='login'),
     path('logout/', logout_then_login, name='logout'),

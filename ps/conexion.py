@@ -68,3 +68,15 @@ def ps_Permisos():
         print("EXCEPT - CONEXIÓN.PY")
 
 
+#VARIABLE DATABASE
+ps_db_VikoSur = 'VikoSur'
+
+def ps_VikoSur():
+    try:
+        ps_VikoSur = mysql.connector.connect(host = ps_server, port = ps_port, user = ps_user, password = ps_psw, db = ps_db_VikoSur)
+        return ps_VikoSur
+    except Exception as e:
+        
+        print(e)
+        print("EXCEPT - VIKOSUR-CONEXIÓN.PY") 
+        return e
