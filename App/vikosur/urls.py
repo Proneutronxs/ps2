@@ -8,5 +8,5 @@ urlpatterns = [
     path('save/remito/idCliente=<str:idCliente>&fecha=<str:fecha>', views.insert_Remito, name="insert_remito"),
     path('maximo/id', views.max_ID, name="max_id"),
     path('save/data/remito/idRemito=<str:idRemito>&cantidad=<str:cantidad>&descripcion=<str:descripcion>&precio=<str:precio>', views.insert_Data_Remito, name="data_remito"),
-    path('download/remito/idRemito=<str:idRemito>', views.download_remito, name="download_remito"),
+    path('download/remito/presupuesto=<str:idRemito>', views.download_remito, name="download_remito"),
 ]
