@@ -2,8 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from ps.conexion import *
 import datetime
-import os
-import mimetypes
+from App.vikosur.modeloPDF import *
 
 # Create your views here.
 ##save/client/nombre=<str:nombre>&ciudad=<str:ciudad>&provincia=<str:provincia>&direccion=<str:direccion>&cuit=<str:cuit>&telefono=<str:telefono>
@@ -100,6 +99,60 @@ def insert_Data_Remito(self, idRemito, cantidad, descripcion, precio):
         insertDataRemito = ("INSERT INTO `DatosRemito` (`idRemito`, `cantidadRemito`, `descripcionRemito`, `importeRemito`) VALUES (%s, %s, %s, %s);")
         cursor_insert_Data_Remito.execute(insertDataRemito, variables)
         Viko.commit()
+
+        datosCliente = ("SELECT        NumeroRemito.ID AS numeroPresupuesto, DATE_FORMAT(NumeroRemito.fechaRemito, '%d/%m/%Y') AS Fecha, Clientes.nombreCliente AS Nombre, Clientes.ciudadCliente AS Ciudad, Clientes.provinciaCliente AS Provincia, Clientes.cuitCliente AS CUIT, Clientes.direccionCliente AS Direccion\n"+
+                        "FROM            NumeroRemito INNER JOIN\n"+
+                                                "Clientes ON NumeroRemito.idCliente = Clientes.ID\n"+
+                        "WHERE        (NumeroRemito.ID = '" + idRemito + "')")
+
+        cursor_insert_Data_Remito.execute(datosCliente)
+        datos_Cliente = cursor_insert_Data_Remito.fetchone()
+        if datos_Cliente:
+            pdf = rondinPDF()
+            pdf.alias_nb_pages()
+            pdf.add_page()
+
+            pdf.set_font('Arial', 'B', 10)#VARIABLE
+            pdf.text(x=45, y=60, txt= str(datos_Cliente[2]))#VARIABLE NOMBRE
+            pdf.set_font('Arial', '', 8)#VARIABLE
+            pdf.text(x=45, y=64, txt= str(datos_Cliente[3]) + ', ' + str(datos_Cliente[4]))#VARIABLE
+            pdf.text(x=45, y=68, txt= str(datos_Cliente[6]))#VARIABLE   
+            pdf.text(x=45, y=72, txt= str(datos_Cliente[5]))#VARIABLE
+            pdf.set_font('Arial', '', 17)#VARIABLE
+            pdf.text(x=123, y=33, txt= 'N° 0005 - 00000' + str(datos_Cliente[0]))#VARIABLE
+            pdf.set_font('Arial', '', 13)#VARIABLE
+            pdf.text(x=123, y=40, txt= 'FECHA ' + str(datos_Cliente[1]))#VARIABLE
+
+            listado_presupuesto = ("SELECT cantidadRemito AS Cantidad, descripcionRemito AS Descripcion, importeRemito AS Importe\n"+
+                                    "FROM DatosRemito\n"+
+                                    "WHERE idRemito='" + idRemito + "'")
+            cursor_insert_Data_Remito.execute(listado_presupuesto)
+
+            i = cursor_insert_Data_Remito.fetchall()
+            if i:
+                for j in i:
+                    print("")
+                    pdf.set_font('Arial', '', 10)
+                    pdf.cell(w=15, h=7, txt= str(j[0]), border='', align='C', fill=0)
+                    pdf.set_font('Arial', '', 8)
+                    pdf.cell(w=125, h=7, txt= str(j[1]), border='', align='L', fill=0)
+                    pdf.set_font('Arial', '', 10)
+                    pdf.cell(w=20, h=7, txt= '$' + str(float(j[2])/int(j[0])), border='', align='C', fill=0)
+                    pdf.multi_cell(w=30, h=7, txt= '$' + str(j[2]), border='', align='C', fill=0)
+
+            suma_total = ("SELECT SUM(CAST(importeRemito AS UNSIGNED)) AS Total\n"+
+                            "FROM DatosRemito\n"+
+                            "WHERE idRemito='" + idRemito + "'")
+            cursor_insert_Data_Remito.execute(suma_total)
+            total = cursor_insert_Data_Remito.fetchone()
+            if total:
+                print("")
+                pdf.set_font('Arial', '', 12)#VARIABLES
+                pdf.text(x=178, y=285, txt= '$' + str(total[0]))#VARIABLES TOTAL
+            
+
+            pdf.output('App/vikosur/presupuestos/'+str(datos_Cliente[2])+"_"+str(datos_Cliente[0])+'.pdf', 'F')
+        
         cursor_insert_Data_Remito.close()
         Viko.close()
         respuesta = 'Success'
