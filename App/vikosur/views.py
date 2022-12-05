@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from ps.conexion import *
 import datetime
+import os
+import mimetypes
 
 # Create your views here.
 ##save/client/nombre=<str:nombre>&ciudad=<str:ciudad>&provincia=<str:provincia>&direccion=<str:direccion>&cuit=<str:cuit>&telefono=<str:telefono>
@@ -110,3 +112,20 @@ def insert_Data_Remito(self, idRemito, cantidad, descripcion, precio):
         lista_estado= [{'Info':e, 'Info2': respuesta}]
         estado = [lista_estado]
         return HttpResponse(estado)
+
+def download_remito(self, idRemito):
+
+    try:
+        f = open('App/vikosur/presupuestos/' + idRemito +'.pdf', 'rb')
+        response = HttpResponse(content=f)
+        response['Content-Type'] = 'application/pdf'
+        return response
+    except Exception as e:
+        print(e)
+        respuesta = 'Error'
+        lista_estado= [{'Info':e, 'Info2': respuesta}]
+        estado = [lista_estado]
+        return HttpResponse(estado)
+
+    
+
