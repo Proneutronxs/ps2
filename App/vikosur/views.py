@@ -138,7 +138,7 @@ def insert_Data_Remito(self, idRemito, cantidad, descripcion, precio):
                     pdf.cell(w=125, h=7, txt= str(j[1]), border='', align='L', fill=0)
                     pdf.set_font('Arial', '', 10)
                     precioUnitario = round(float(j[2])/int(j[0]),2)
-                    precioUnitarioSinComa = precioUnitario.replace(".", ",")
+                    precioUnitarioSinComa = str(precioUnitario).replace(".", ",")
                     pdf.cell(w=20, h=7, txt= '$' + str(precioUnitarioSinComa), border='', align='C', fill=0)
                     pdf.multi_cell(w=30, h=7, txt= '$' + str(j[2]), border='', align='C', fill=0)
 
