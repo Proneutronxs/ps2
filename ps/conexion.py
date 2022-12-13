@@ -33,6 +33,8 @@ def SQLRondin():
 db_SQLRoca5_Zetoneapp = 'Zetoneapp'
 
 def SQLRoca5():
+    #connection = None
+    #if not connection:
     try:
         Roca5 = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server}; SERVER=' + zt_server +'; DATABASE=' + db_SQLRoca5_Zetoneapp + '; UID=' + zt_user + '; PWD=' + zt_psw)
         return Roca5
