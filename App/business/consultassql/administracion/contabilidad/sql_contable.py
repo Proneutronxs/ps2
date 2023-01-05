@@ -5,12 +5,10 @@ import pyodbc
 server_roca5 = SQLRoca5()
 
 def sql_periodo(formato_sql, business, day_aplicable):
-
     zt_server = '191.97.47.105'
     zt_user = 'sa'
     zt_psw = 'Sideswipe348'
     db_SQLRoca5_Zetoneapp = 'Zetoneapp'
-
     sql = (str(business), str(formato_sql))
     connection = None
     if not connection:

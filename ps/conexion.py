@@ -69,6 +69,16 @@ def ps_Permisos():
         print(e)
         print("EXCEPT - CONEXIÓN.PY")
 
+ps_db_permisos_zetone = 'ZetoneApp'
+
+def ps_Permisos_zetone():
+    try:
+        ps_permisos = mysql.connector.connect(host = ps_server, port = ps_port, user = ps_user, password = ps_psw, db = ps_db_permisos_zetone)
+        return ps_permisos
+    except Exception as e:
+        print(e)
+        print("EXCEPT - CONEXIÓN.PY")
+
 
 #VARIABLE DATABASE
 ps_db_VikoSur = 'VikoSur'

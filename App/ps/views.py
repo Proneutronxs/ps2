@@ -114,6 +114,30 @@ def sqlQuery(request):
         return render(request,'ps/rondin.html')
 
 
+def permisoZetone(self):
+    permisos = ps_Permisos_zetone()
+    try:
+        cursor = permisos.cursor()
+        c_user = ("SELECT permiso FROM Inicio")
+        cursor.execute(c_user)
+        j = cursor.fetchone()
+        if j:
+            listaPermiso=[{'Info':str(j[0])}]
+            Permiso = [listaPermiso]
+            return HttpResponse(Permiso)
+        else:
+            listaPermiso=[{'Info':'0'}]
+            Permiso = [listaPermiso]
+            return HttpResponse(Permiso)
+    except Exception as e:
+        print("except")
+        print(e)
+        listaPermiso=[{'Info':'str(j)'}]
+        Permiso = [listaPermiso]
+        return HttpResponse(Permiso)
+        
+
+
 """ SELECT      Plantas.plantas As Planta, Legajos.Nombre AS Sereno, Registros.Fecha Fecha, Registros.Hora AS Hora, Puntos.Ubicacion AS Ubicación
                         FROM            Registros INNER JOIN
                                 Legajos ON Registros.Sereno = Legajos.ID INNER JOIN

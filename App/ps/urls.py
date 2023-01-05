@@ -11,4 +11,7 @@ urlpatterns = [
 
     #Prueba Rondin
     path('search', views.sqlQuery, name="search"),
+
+    #PS APP ZETONE
+    path('permiso/app', views.permisoZetone, name="permisos_app"),
 ]
