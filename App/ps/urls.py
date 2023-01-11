@@ -15,4 +15,5 @@ urlpatterns = [
     #PS APP ZETONE
     path('permiso/app', views.permisoZetone, name="permisos_app"),
     path('permiso/app/actualizacion/estado=<str:estado>/detalle=<str:detalle>', views.actualizacionEstado, name="actualizacion_estado"),
+    path('estado', views.estado, name="estado"),
 ]

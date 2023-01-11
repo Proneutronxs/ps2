@@ -132,7 +132,7 @@ def permisoZetone(self):
     except Exception as e:
         print("except")
         print(e)
-        listaPermiso=[{'Info':'str(j)'}]
+        listaPermiso=[{'Info':'Exception'}]
         Permiso = [listaPermiso]
         return HttpResponse(Permiso)
 
@@ -147,6 +147,21 @@ def actualizacionEstado(self, estado, detalle):
         cursor.execute(sql, data)
         permisos.commit()
 
+        
+        listaPermiso=[{'Info':'No existen detalles.'}]
+        Permiso = [listaPermiso]
+        return HttpResponse(Permiso)
+    except Exception as e:
+        print("except")
+        print(e)
+        listaPermiso=[{'Info':'Exception'}]
+        Permiso = [listaPermiso]
+        return HttpResponse(Permiso)
+
+def estado(self):
+    permisos = ps_Permisos_zetone()
+    try:
+        cursor = permisos.cursor()
         sql2 = ("SELECT Comunicacion FROM Inicio WHERE ID=1")
         cursor.execute(sql2)
         j = cursor.fetchone()
@@ -154,13 +169,14 @@ def actualizacionEstado(self, estado, detalle):
             listaPermiso=[{'Info':str(j[0])}]
             Permiso = [listaPermiso]
             return HttpResponse(Permiso)
-        listaPermiso=[{'Info':'No existen detalles.'}]
-        Permiso = [listaPermiso]
-        return HttpResponse(Permiso)
+        else:
+            listaPermiso=[{'Info':'ERROR'}]
+            Permiso = [listaPermiso]
+            return HttpResponse(Permiso)
     except Exception as e:
         print("except")
         print(e)
-        listaPermiso=[{'Info':'error'}]
+        listaPermiso=[{'Info':'Exception'}]
         Permiso = [listaPermiso]
         return HttpResponse(Permiso)
 
