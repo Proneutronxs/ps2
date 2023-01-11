@@ -135,13 +135,32 @@ def permisoZetone(self):
         listaPermiso=[{'Info':'str(j)'}]
         Permiso = [listaPermiso]
         return HttpResponse(Permiso)
-        
 
+def actualizacionEstado(self, estado, detalle):
+    print(str(estado))
+    print(str(detalle))
+    data=[estado, detalle]
+    permisos = ps_Permisos_zetone()
+    try:
+        cursor = permisos.cursor()
+        sql = ("UPDATE Inicio SET permiso=%s, Comunicacion=%s WHERE ID=1")
+        cursor.execute(sql, data)
+        permisos.commit()
 
-""" SELECT      Plantas.plantas As Planta, Legajos.Nombre AS Sereno, Registros.Fecha Fecha, Registros.Hora AS Hora, Puntos.Ubicacion AS Ubicación
-                        FROM            Registros INNER JOIN
-                                Legajos ON Registros.Sereno = Legajos.ID INNER JOIN
-                                Plantas ON Registros.Planta = Plantas.ID INNER JOIN
-                                Puntos ON Registros.Punto = Puntos.ID
-WHERE Registros.fecha = "2022-09-20" AND Plantas.Plantas = "Planta Uno"
-ORDER BY  Plantas.Plantas, Registros.Fecha, Legajos.Nombre, Puntos.Ubicacion, Puntos.ID """
+        sql2 = ("SELECT Comunicacion FROM Inicio WHERE ID=1")
+        cursor.execute(sql2)
+        j = cursor.fetchone()
+        if j:
+            listaPermiso=[{'Info':str(j[0])}]
+            Permiso = [listaPermiso]
+            return HttpResponse(Permiso)
+        listaPermiso=[{'Info':'No existen detalles.'}]
+        Permiso = [listaPermiso]
+        return HttpResponse(Permiso)
+    except Exception as e:
+        print("except")
+        print(e)
+        listaPermiso=[{'Info':'error'}]
+        Permiso = [listaPermiso]
+        return HttpResponse(Permiso)
+
