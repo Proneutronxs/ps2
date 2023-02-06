@@ -41,12 +41,12 @@ const procesoVariedad = async() => {
         let procesoVariedad = JSON.parse(data)
         if (procesoVariedad.message == "Success"){
             let cantidadEmbalado = ``;
-            cantidadEmbalado = `<h5>EMPAQUE PERA - PROCESANDO: ${procesoVariedad.variedad}</h5>`;
+            cantidadEmbalado = `<h6>EMPAQUE PERA - PROCESANDO: ${procesoVariedad.variedad}</h6>`;
             document.getElementById('proceso').innerHTML = cantidadEmbalado;
             cargaLotes();
         }else{
             let cantidadEmbalado = ``;
-            cantidadEmbalado = `<h5>EMPAQUE PERA - SIN PROCESO</h5>`;
+            cantidadEmbalado = `<h6>EMPAQUE PERA - SIN PROCESO</h6>`;
             document.getElementById('proceso').innerHTML = cantidadEmbalado;
         }
         
