@@ -2,8 +2,6 @@
 from ps.conexion import *
 import pyodbc
 
-server_roca5 = SQLRoca5()
-
 def sql_periodo(formato_sql, business, day_aplicable):
     zt_server = '191.97.47.105'
     zt_user = 'sa'

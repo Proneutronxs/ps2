@@ -28,7 +28,7 @@ def SQLRondin():
         return Rondin
     except Exception as e: 
         print(e)
-        print("EXCEPT - CONEXIÓN.PY") 
+        print("EXCEPT - CONEXIÓN.PY RONDIN") 
 
 db_SQLRoca5_Zetoneapp = 'Zetoneapp'
 
@@ -40,7 +40,7 @@ def SQLRoca5():
         return Roca5
     except Exception as e: 
         print(e)
-        print("EXCEPT - CONEXIÓN.PY")
+        print("EXCEPT - CONEXIÓN.PY ROCA 5")
 
 
 
