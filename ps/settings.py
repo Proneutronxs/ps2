@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'App.ps',
     'App.business',
+    'App.vikosur',
+    'App.zetone',
 ]
 
 MIDDLEWARE = [

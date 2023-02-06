@@ -1,0 +1,35 @@
+{% extends "Zetone/inicio/index.html" %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="pera">
+    <div class="titulo">
+        <div id="proceso">
+            
+        </div>
+        <div>
+            <select name="select" class="combox" id="comboxPera">
+                <option value="binsProcesados">Bins Procesados</option>
+                <option value="cantCajasMarca">Cantidad de Cajas por Marca</option>
+                <option value="cantCajasCalidad">Cantidad de Cajas por Calidad</option>
+                <option value="cantCajasEnvase">Cantidad de Cajas por Envase</option>
+                <option value="cantCajasCalibre">Cantidad de Cajas por Calibre</option>
+            </select>
+        </div>
+        <div class="parrafos" id="fecha"></div>
+    </div>
+    <div class="row">
+        <div class="tableLote borderLote">
+            <div class="listado2" id="titulo"></div>
+            <div class="scrollTable" id="listadoPera">
+            </div>
+        </div>
+        <div class="detalle" id="detalle">
+        </div>
+    </div>
+</div>
+<script src="{%static 'zetone/js/apple.js' %}"></script>
+
+{% endblock %}
