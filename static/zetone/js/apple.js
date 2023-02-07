@@ -60,6 +60,8 @@ const procesoVariedad = async() => {
 
 //LOTES DE PERA
 const cargaLotesManzana = async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("apple/lote");
         const data = await response.json();
@@ -68,7 +70,7 @@ const cargaLotesManzana = async() => {
         await tituloLotes();
         //console.log(dataLotes.message)
         if(dataLotes.message=="Success"){
-            await cantidadManzana();
+            cantidadManzana();
             let listaLotes = ``;
             dataLotes.lotes.forEach((lotes) =>{
                 listaLotes += `<div class="listado">${lotes.lote} &#8594; ${lotes.bins} Bins &#8594; ${lotes.hora} Hs.</div>`;
@@ -112,6 +114,8 @@ const tituloLotes = async() => {
 
 //CAJAS POR CALIDAD
 const cajasCalidadManzana= async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("apple/cajas/calidad");
         const data = await response.json();
@@ -141,6 +145,8 @@ const tituloCalidad = async() => {
 
 //CAJAS POR CALIBRE
 const cajasCalibreManzana= async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("apple/cajas/calibre");
         const data = await response.json();
@@ -170,6 +176,8 @@ const tituloCalibre = async() => {
 
 //CAJAS POR MARCA
 const cajasMarcaManzana= async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("apple/cajas/marca");
         const data = await response.json();
@@ -199,6 +207,8 @@ const tituloMarca = async() => {
 
 //CAJAS POR ENVASE
 const cajasEnvaseManzana = async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("apple/cajas/envase");
         const data = await response.json();
@@ -224,6 +234,18 @@ const cajasEnvaseManzana = async() => {
 
 const tituloEnvase = async() => {
     document.getElementById('titulo').innerHTML = 'ENVASE - CANTIDAD DE CAJAS';
+};
+
+const limpiezaListado = async() => {
+    let limpezaListados = ``;
+    limpezaListados = `<div class=""></div>`;
+    document.getElementById('listadoPera').innerHTML = limpezaListados; 
+};
+
+const limpiezaCantidad = async() => {
+let limpieza = ``;
+limpieza = `<div class="numeros"></div>`;
+document.getElementById('detalle').innerHTML = limpieza; 
 };
 
 

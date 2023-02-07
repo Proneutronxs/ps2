@@ -60,6 +60,8 @@ const procesoVariedad = async() => {
 
 //LOTES DE PERA
 const cargaLotes = async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("pears/lote");
         const data = await response.json();
@@ -112,6 +114,8 @@ const tituloLotes = async() => {
 
 //CAJAS POR CALIDAD
 const cajasCalidadPera = async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/calidad");
         const data = await response.json();
@@ -144,6 +148,8 @@ const tituloCalidad = async() => {
 
 //CAJAS POR CALIBRE
 const cajasCalibrePera = async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/calibre");
         const data = await response.json();
@@ -173,6 +179,8 @@ const tituloCalibre = async() => {
 
 //CAJAS POR CALIBRE
 const cajasMarcaPera = async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/marca");
         const data = await response.json();
@@ -202,6 +210,8 @@ const tituloMarca = async() => {
 
 //CAJAS POR ENVASE
 const cajasEnvasePera = async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/envase");
         const data = await response.json();
@@ -227,6 +237,18 @@ const cajasEnvasePera = async() => {
 
 const tituloEnvase = async() => {
     document.getElementById('titulo').innerHTML = 'ENVASE - CANTIDAD DE CAJAS';
+};
+
+const limpiezaListado = async() => {
+    let limpezaListados = ``;
+    limpezaListados = `<div class=""></div>`;
+    document.getElementById('listadoPera').innerHTML = limpezaListados; 
+};
+
+const limpiezaCantidad = async() => {
+let limpieza = ``;
+limpieza = `<div class="numeros"></div>`;
+document.getElementById('detalle').innerHTML = limpieza; 
 };
 
 

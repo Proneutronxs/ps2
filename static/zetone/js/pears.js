@@ -17,6 +17,8 @@ const fecha = async() => {
 };
 
 const cantidadEmbalado = async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("pears/cantidad/embalado");
         const data = await response.json();
@@ -60,15 +62,17 @@ const procesoVariedad = async() => {
 
 //LOTES DE PERA
 const cargaLotes = async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("pears/lote");
         const data = await response.json();
         //console.log(data)
         let dataLotes = JSON.parse(data)
-        await tituloLotes();
+        tituloLotes();
         //console.log(dataLotes.message)
         if(dataLotes.message=="Success"){
-            await cantidadPera();
+            cantidadPera();
             let listaLotes = ``;
             dataLotes.lotes.forEach((lotes) =>{
                 listaLotes += `<div class="listado">${lotes.lote} &#8594; ${lotes.bins} Bins &#8594; ${lotes.hora} Hs.</div>`;
@@ -84,6 +88,8 @@ const cargaLotes = async() => {
 };
 
 const cantidadPera = async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("pears/cantidad/lotes");
         const data = await response.json();
@@ -101,17 +107,29 @@ const cantidadPera = async() => {
 };
 
 const cargaInicial = async() => {
-    await procesoVariedad();
+    procesoVariedad();
 };
 
 const tituloLotes = async() => {
     document.getElementById('titulo').innerHTML = 'LOTE / PRODUCTOR - BINS EMB. - HORA';
 };
 
+const limpiezaListado = async() => {
+    let limpezaListados = ``;
+    limpezaListados = `<div class=""></div>`;
+    document.getElementById('listadoPera').innerHTML = limpezaListados; 
+};
 
+const limpiezaCantidad = async() => {
+let limpieza = ``;
+limpieza = `<div class="numeros"></div>`;
+document.getElementById('detalle').innerHTML = limpieza; 
+};
 
 //CAJAS POR CALIDAD
 const cajasCalidadPera = async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/calidad");
         const data = await response.json();
@@ -144,6 +162,8 @@ const tituloCalidad = async() => {
 
 //CAJAS POR CALIBRE
 const cajasCalibrePera = async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/calibre");
         const data = await response.json();
@@ -173,6 +193,8 @@ const tituloCalibre = async() => {
 
 //CAJAS POR CALIBRE
 const cajasMarcaPera = async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/marca");
         const data = await response.json();
@@ -202,6 +224,8 @@ const tituloMarca = async() => {
 
 //CAJAS POR ENVASE
 const cajasEnvasePera = async() => {
+    limpiezaListado();
+    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/envase");
         const data = await response.json();
