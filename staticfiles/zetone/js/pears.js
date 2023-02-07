@@ -67,10 +67,10 @@ const cargaLotes = async() => {
         const data = await response.json();
         //console.log(data)
         let dataLotes = JSON.parse(data)
-        await tituloLotes();
+        tituloLotes();
         //console.log(dataLotes.message)
         if(dataLotes.message=="Success"){
-            await cantidadPera();
+            cantidadPera();
             let listaLotes = ``;
             dataLotes.lotes.forEach((lotes) =>{
                 listaLotes += `<div class="listado">${lotes.lote} &#8594; ${lotes.bins} Bins &#8594; ${lotes.hora} Hs.</div>`;
