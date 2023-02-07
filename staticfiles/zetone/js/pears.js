@@ -60,8 +60,6 @@ const procesoVariedad = async() => {
 
 //LOTES DE PERA
 const cargaLotes = async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("pears/lote");
         const data = await response.json();
@@ -114,8 +112,6 @@ const tituloLotes = async() => {
 
 //CAJAS POR CALIDAD
 const cajasCalidadPera = async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/calidad");
         const data = await response.json();
@@ -148,8 +144,6 @@ const tituloCalidad = async() => {
 
 //CAJAS POR CALIBRE
 const cajasCalibrePera = async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/calibre");
         const data = await response.json();
@@ -179,8 +173,6 @@ const tituloCalibre = async() => {
 
 //CAJAS POR CALIBRE
 const cajasMarcaPera = async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/marca");
         const data = await response.json();
@@ -210,8 +202,6 @@ const tituloMarca = async() => {
 
 //CAJAS POR ENVASE
 const cajasEnvasePera = async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/envase");
         const data = await response.json();
@@ -262,18 +252,28 @@ window.addEventListener("load", async () =>{
         //console.log(event.target);
         //console.log(event.target.value);
         if(event.target.value=="cantCajasCalidad"){
+            limpiezaListado();
+            limpiezaCantidad();
             cajasCalidadPera();
         }
         if(event.target.value=="binsProcesados"){
+            limpiezaListado();
+            limpiezaCantidad();
             cargaInicial();
         }
         if(event.target.value=="cantCajasCalibre"){
+            limpiezaListado();
+            limpiezaCantidad();
             cajasCalibrePera();
         }
         if(event.target.value=="cantCajasMarca"){
+            limpiezaListado();
+            limpiezaCantidad();
             cajasMarcaPera();
         }
         if(event.target.value=="cantCajasEnvase"){
+            limpiezaListado();
+            limpiezaCantidad();
             cajasEnvasePera();
         }
     });

@@ -17,8 +17,6 @@ const fecha = async() => {
 };
 
 const cantidadEmbalado = async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("pears/cantidad/embalado");
         const data = await response.json();
@@ -62,8 +60,6 @@ const procesoVariedad = async() => {
 
 //LOTES DE PERA
 const cargaLotes = async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("pears/lote");
         const data = await response.json();
@@ -88,8 +84,6 @@ const cargaLotes = async() => {
 };
 
 const cantidadPera = async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("pears/cantidad/lotes");
         const data = await response.json();
@@ -128,8 +122,6 @@ document.getElementById('detalle').innerHTML = limpieza;
 
 //CAJAS POR CALIDAD
 const cajasCalidadPera = async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/calidad");
         const data = await response.json();
@@ -162,8 +154,6 @@ const tituloCalidad = async() => {
 
 //CAJAS POR CALIBRE
 const cajasCalibrePera = async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/calibre");
         const data = await response.json();
@@ -193,8 +183,6 @@ const tituloCalibre = async() => {
 
 //CAJAS POR CALIBRE
 const cajasMarcaPera = async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/marca");
         const data = await response.json();
@@ -224,8 +212,6 @@ const tituloMarca = async() => {
 
 //CAJAS POR ENVASE
 const cajasEnvasePera = async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("pears/cajas/envase");
         const data = await response.json();
@@ -235,6 +221,7 @@ const cajasEnvasePera = async() => {
         tituloEnvase();
         if(dataCajasEnvase.message=="Success"){
             cantidadEmbalado();
+            //setInterval('cantidadEmbalado()',3000);
             let listaCajasEnvase = ``;
             dataCajasEnvase.cajas.forEach((cajas) =>{
                 listaCajasEnvase += `<div class="listado">${cajas.envase} &#8594; ${cajas.cantidad} Bultos</div>`;
@@ -264,18 +251,28 @@ window.addEventListener("load", async () =>{
         //console.log(event.target);
         //console.log(event.target.value);
         if(event.target.value=="cantCajasCalidad"){
+            limpiezaListado();
+            limpiezaCantidad();
             cajasCalidadPera();
         }
         if(event.target.value=="binsProcesados"){
+            limpiezaListado();
+            limpiezaCantidad();
             cargaInicial();
         }
         if(event.target.value=="cantCajasCalibre"){
+            limpiezaListado();
+            limpiezaCantidad();
             cajasCalibrePera();
         }
         if(event.target.value=="cantCajasMarca"){
+            limpiezaListado();
+            limpiezaCantidad();
             cajasMarcaPera();
         }
         if(event.target.value=="cantCajasEnvase"){
+            limpiezaListado();
+            limpiezaCantidad();
             cajasEnvasePera();
         }
     });

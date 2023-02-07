@@ -60,8 +60,6 @@ const procesoVariedad = async() => {
 
 //LOTES DE PERA
 const cargaLotesManzana = async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("apple/lote");
         const data = await response.json();
@@ -114,8 +112,6 @@ const tituloLotes = async() => {
 
 //CAJAS POR CALIDAD
 const cajasCalidadManzana= async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("apple/cajas/calidad");
         const data = await response.json();
@@ -145,8 +141,6 @@ const tituloCalidad = async() => {
 
 //CAJAS POR CALIBRE
 const cajasCalibreManzana= async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("apple/cajas/calibre");
         const data = await response.json();
@@ -176,8 +170,6 @@ const tituloCalibre = async() => {
 
 //CAJAS POR MARCA
 const cajasMarcaManzana= async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("apple/cajas/marca");
         const data = await response.json();
@@ -207,8 +199,6 @@ const tituloMarca = async() => {
 
 //CAJAS POR ENVASE
 const cajasEnvaseManzana = async() => {
-    limpiezaListado();
-    limpiezaCantidad();
     try{
         const response = await fetch("apple/cajas/envase");
         const data = await response.json();
@@ -259,18 +249,28 @@ window.addEventListener("load", async () =>{
         //console.log(event.target);
         //console.log(event.target.value);
         if(event.target.value=="cantCajasCalidad"){
+            limpiezaListado();
+            limpiezaCantidad();
             cajasCalidadManzana();
         }
         if(event.target.value=="binsProcesados"){
+            limpiezaListado();
+            limpiezaCantidad();
             cargaInicial();
         }
         if(event.target.value=="cantCajasCalibre"){
+            limpiezaListado();
+            limpiezaCantidad();
             cajasCalibreManzana();
         }
         if(event.target.value=="cantCajasMarca"){
+            limpiezaListado();
+            limpiezaCantidad();
             cajasMarcaManzana();
         }
         if(event.target.value=="cantCajasEnvase"){
+            limpiezaListado();
+            limpiezaCantidad();
             cajasEnvaseManzana();
         }
     });
