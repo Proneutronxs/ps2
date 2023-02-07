@@ -4,7 +4,7 @@ from App.zetone import views
 urlpatterns = [
 
 ### sólo renderizado
-path('', views.index, name="index"),
+path('', views.index, name="index_zetone"),
 path('pears', views.pear, name="pear"),
 path('apple', views.apple, name="apple"),
 
