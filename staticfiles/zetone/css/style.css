@@ -10090,6 +10090,14 @@ h6{
   text-align: center;
 }
 
+.btn-refresh{
+  border-radius: 15%;
+  border: 1px solid #0bb50c;
+  background-color: #011327;
+  color: white;
+  text-align: center;
+}
+
 .detalle{
   margin-top: -5em;
   text-align: center;

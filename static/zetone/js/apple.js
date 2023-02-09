@@ -238,7 +238,36 @@ limpieza = `<div class="numeros"></div>`;
 document.getElementById('detalle').innerHTML = limpieza; 
 };
 
+function actualizarM(){
+    var combox = document.getElementById('comboxPera').value;
+    //alert(combox);
+    if(combox=="cantCajasCalidad"){
+        limpiezaListado();
+        limpiezaCantidad();
+        cajasCalidadPera();
+    }
+    if(combox=="binsProcesados"){
+        limpiezaListado();
+        limpiezaCantidad();
+        cargaInicial();
+    }
+    if(combox=="cantCajasCalibre"){
+        limpiezaListado();
+        limpiezaCantidad();
+        cajasCalibrePera();
+    }
+    if(combox=="cantCajasMarca"){
+        limpiezaListado();
+        limpiezaCantidad();
+        cajasMarcaPera();
+    }
+    if(combox=="cantCajasEnvase"){
+        limpiezaListado();
+        limpiezaCantidad();
+        cajasEnvasePera();
+    }
 
+}
 
 window.addEventListener("load", async () =>{
     await cargaInicial();
