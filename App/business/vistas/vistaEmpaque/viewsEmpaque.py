@@ -74,6 +74,9 @@ def verRegistros(request):
         except Exception as e:
             lista = [e]
             return render(request,'business/empaque/rondin/errorRondin.html', {'error': lista})
+        finally:
+            cursor_export.close()
+            Rondin.close()
     else:
         variable = "empaque"
         return render(request,'business/empaque/rondin/verRegistros.html', {'business': variable, 'empaque': variable})
@@ -138,6 +141,9 @@ def exportRondin(request):
             print (e)
             print(lista)
             return render(request,'business/empaque/rondin/errorRondin.html', {'error': lista})
+        finally:
+            cursor_export.close()
+            Rondin.close()
     else:
         variable = "empaque"
         return render(request,'business/empaque/rondin/exportRondin.html', {'business': variable, 'empaque': variable})
@@ -183,6 +189,9 @@ def newSereno(request):
                 print(e)
                 variable = "----ERROR DE CONEXIÓN----"
                 return render(request,'business/empaque/rondin/errorRondin.html', {'error': variable})
+            finally:
+                cursorRondin.close()
+                Rondin.close()
     else:
         variable = "empaque"
         return render(request,'business/empaque/rondin/newsereno.html', {'business': variable, 'empaque': variable})
@@ -253,6 +262,9 @@ def exportRondin2(request):
             print (e)
             print(lista)
             return render(request,'business/empaque/rondin/errorRondin.html', {'error': lista})
+        finally:
+            cursor_export.close()
+            Rondin.close()
     else:
         variable = "empaque"
         return render(request,'business/empaque/rondin/exportRondin.html', {'business': variable, 'empaque': variable})

@@ -9,4 +9,7 @@ urlpatterns = [
     path('maximo/id', views.max_ID, name="max_id"),
     path('save/data/remito/idRemito=<str:idRemito>&cantidad=<str:cantidad>&descripcion=<str:descripcion>&precio=<str:precio>', views.insert_Data_Remito, name="data_remito"),
     path('download/remito/<str:idRemito>', views.download_remito, name="download_remito"),
+
+    
+
 ]

@@ -28,6 +28,9 @@ def insert_Cliente(self, nombre, ciudad, provincia, direccion, cuit, telefono):
         lista_estado= [{'Info':e, 'Info2': respuesta}]
         estado = [lista_estado]
         return HttpResponse(estado)
+    finally:
+        cursor_insertCliente.close()
+        Viko.close()
 
 def insert_Remito(self, idCliente, fecha):
     fechaMySql = datetime.datetime.strptime(str(fecha), "%d-%m-%Y").strftime("%Y-%m-%d")
@@ -50,6 +53,9 @@ def insert_Remito(self, idCliente, fecha):
         lista_estado= [{'Info':e, 'Info2': respuesta}]
         estado = [lista_estado]
         return HttpResponse(estado)
+    finally:
+        cursor_insertRemito.close()
+        Viko.close()
 
 def listado_Clientes(self):
     Viko = ps_VikoSur()
@@ -71,6 +77,9 @@ def listado_Clientes(self):
         lista_estado= [{'Info':e, 'Info2': respuesta}]
         estado = [lista_estado]
         return HttpResponse(estado)
+    finally:
+        cursor_mostrarCliente.close()
+        Viko.close()
 
 def max_ID(self):
     Viko = ps_VikoSur()
@@ -90,6 +99,9 @@ def max_ID(self):
         lista_estado= [{'Info':e, 'Info2': respuesta}]
         estado = [lista_estado]
         return HttpResponse(estado)
+    finally:
+        cursor_maxID.close()
+        Viko.close()
 
 def insert_Data_Remito(self, idRemito, cantidad, descripcion, precio):
     variables = [idRemito, cantidad, descripcion, precio]
@@ -167,6 +179,9 @@ def insert_Data_Remito(self, idRemito, cantidad, descripcion, precio):
         lista_estado= [{'Info':e, 'Info2': respuesta}]
         estado = [lista_estado]
         return HttpResponse(estado)
+    finally:
+        cursor_insert_Data_Remito.close()
+        Viko.close()
 
 def download_remito(self, idRemito):
 
