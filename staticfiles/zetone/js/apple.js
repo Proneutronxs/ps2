@@ -244,7 +244,7 @@ function actualizarM(){
     if(combox=="cantCajasCalidad"){
         limpiezaListado();
         limpiezaCantidad();
-        cajasCalidadPera();
+        cajasCalidadManzana();
     }
     if(combox=="binsProcesados"){
         limpiezaListado();
@@ -254,17 +254,17 @@ function actualizarM(){
     if(combox=="cantCajasCalibre"){
         limpiezaListado();
         limpiezaCantidad();
-        cajasCalibrePera();
+        cajasCalibreManzana();
     }
     if(combox=="cantCajasMarca"){
         limpiezaListado();
         limpiezaCantidad();
-        cajasMarcaPera();
+        cajasMarcaManzana();
     }
     if(combox=="cantCajasEnvase"){
         limpiezaListado();
         limpiezaCantidad();
-        cajasEnvasePera();
+        cajasEnvaseManzana();
     }
 
 }
