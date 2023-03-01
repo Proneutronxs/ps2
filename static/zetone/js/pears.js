@@ -24,7 +24,7 @@ const cantidadEmbalado = async() => {
         let cantEmbalado = JSON.parse(data)
         //console.log(cantEmbalado)
         let cantidadEmbalado = ``;
-        cantidadEmbalado = `<div class="numeros">CANTIDAD DE CAJAS EMBALADAS<br>${cantEmbalado.cantidad}</div>`;
+        cantidadEmbalado = `<div class="numeros">CANTIDAD DE CAJAS EMBALADAS: ${cantEmbalado.cantidad}<br> KILOS EMBALADOS APROX: ${cantEmbalado.peso} Kg.</div>`;
         document.getElementById('detalle').innerHTML = cantidadEmbalado; 
         
     } catch(error){
@@ -91,7 +91,7 @@ const cantidadPera = async() => {
         let dataLotes = JSON.parse(data)
         //console.log(dataLotes.cantidad)
         let cantidadLotes = ``;
-        cantidadLotes = `<div class="numeros">CANTIDAD DE BINS PROCESADOS<br>${dataLotes.cantidad}</div>`;
+        cantidadLotes = `<div class="numeros">CANTIDAD DE BINS PROCESADOS: ${dataLotes.cantidad}<br>KILOS PROCESADOS APROX: ${dataLotes.peso} Kg.</div>`;
         document.getElementById('detalle').innerHTML = cantidadLotes; 
         
     } catch(error){

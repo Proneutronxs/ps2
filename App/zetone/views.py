@@ -83,14 +83,16 @@ def cantBinsPera(request):
     try:
         ZT = cox()
         cursorLotes = ZT.cursor()
-        consultaLotes = ("SELECT SUM(binsEmboq_loteEtiquetado) AS totalProceso\n"+
+        consultaLotes = ("SELECT SUM(binsEmboq_loteEtiquetado) AS totalProceso, SUM(pesoEmboq_loteEtiquetado) AS totalPeso \n"+
                         "FROM [servidordb].Trazabilidad.dbo.LoteEtiquetado\n"+
                         "WHERE (id_galpon='1' AND CONVERT(varchar(10), Fecha, 103)='" + fechaActual() + "')")
         cursorLotes.execute(consultaLotes)
         consulta = cursorLotes.fetchone()
         if consulta:
             cantidad = str(consulta[0])
-            jsonList = json.dumps({'message':'Success', 'cantidad': cantidad}) 
+            peso = str(consulta[1])
+            #print(peso)
+            jsonList = json.dumps({'message':'Success', 'cantidad': cantidad, 'peso': peso}) 
             #print(jsonList)
             cursorLotes.close()
             ZT.close()
@@ -179,14 +181,18 @@ def cantCajas(request):
     try:
         ZT = cox()
         cursorLotes = ZT.cursor()
-        consultaLotes = ("SELECT        COUNT(1) AS Cajas\n"+
-                        "FROM            servidordb.Trazabilidad.dbo.Bulto\n"+
-                        "WHERE        (Id_bulto > 17273700) AND CONVERT(varchar(10), Bulto.fecha_alta_bulto, 103)='" + fechaActual() + "' AND (id_galpon = '1')")
+        consultaLotes = ("SELECT        COUNT(1) AS Cajas, SUM(Envase.pesoNeto_envase) AS Peso\n"+
+                        "FROM            servidordb.Trazabilidad.dbo.Bulto INNER JOIN\n"+
+                                        "servidordb.Trazabilidad.dbo.Configuracion ON Bulto.id_configuracion = Configuracion.id_configuracion INNER JOIN\n"+
+                                        "servidordb.Trazabilidad.dbo.Envase ON Configuracion.id_envase = Envase.id_envase\n"+
+                        "WHERE        (Id_bulto > 17273700) AND CONVERT(varchar(10), Bulto.fecha_alta_bulto, 103)='" + fechaActual() + "' AND (Bulto.id_galpon = '1')")
         cursorLotes.execute(consultaLotes)
         consulta = cursorLotes.fetchone()
         if consulta:
             cantidad = str(consulta[0])
-            jsonList = json.dumps({'message':'Success', 'cantidad': cantidad}) 
+            peso = str(consulta[1])
+            #print(peso)
+            jsonList = json.dumps({'message':'Success', 'cantidad': cantidad, 'peso': peso}) 
             #print(jsonList)
             cursorLotes.close()
             ZT.close()
@@ -353,14 +359,16 @@ def cantBinsManzana(request):
     try:
         ZT = cox()
         cursorLotes = ZT.cursor()
-        consultaLotes = ("SELECT SUM(binsEmboq_loteEtiquetado) AS totalProceso\n"+
+        consultaLotes = ("SELECT SUM(binsEmboq_loteEtiquetado) AS totalProceso, SUM(pesoEmboq_loteEtiquetado) AS Peso\n"+
                         "FROM [servidordb].Trazabilidad.dbo.LoteEtiquetado\n"+
                         "WHERE (id_galpon='8' AND CONVERT(varchar(10), Fecha, 103)='" + fechaActual() + "')")
         cursorLotes.execute(consultaLotes)
         consulta = cursorLotes.fetchone()
         if consulta:
             cantidad = str(consulta[0])
-            jsonList = json.dumps({'message':'Success', 'cantidad': cantidad}) 
+            peso = str(consulta[1])
+            #print(peso)
+            jsonList = json.dumps({'message':'Success', 'cantidad': cantidad, 'peso': peso}) 
             #print(jsonList)
             cursorLotes.close()
             ZT.close()
@@ -449,14 +457,18 @@ def cantCajasManzana(request):
     try:
         ZT = cox()
         cursorLotes = ZT.cursor()
-        consultaLotes = ("SELECT        COUNT(1) AS Cajas\n"+
-                        "FROM            servidordb.Trazabilidad.dbo.Bulto\n"+
-                        "WHERE        (Id_bulto > 17273700) AND CONVERT(varchar(10), Bulto.fecha_alta_bulto, 103)='" + fechaActual() + "' AND (id_galpon = '8')")
+        consultaLotes = ("SELECT        COUNT(1) AS Cajas, SUM(Envase.pesoNeto_envase)\n"+
+                                "FROM            servidordb.Trazabilidad.dbo.Bulto INNER JOIN\n"+
+                                                "servidordb.Trazabilidad.dbo.Configuracion ON Bulto.id_configuracion = Configuracion.id_configuracion INNER JOIN\n"+
+                                                "servidordb.Trazabilidad.dbo.Envase ON Configuracion.id_envase = Envase.id_envase\n"+
+                        "WHERE        (Id_bulto > 17273700) AND CONVERT(varchar(10), Bulto.fecha_alta_bulto, 103)='" + fechaActual() + "' AND (Bulto.id_galpon = '8')")
         cursorLotes.execute(consultaLotes)
         consulta = cursorLotes.fetchone()
         if consulta:
             cantidad = str(consulta[0])
-            jsonList = json.dumps({'message':'Success', 'cantidad': cantidad}) 
+            peso = str(consulta[1])
+            #print(peso)
+            jsonList = json.dumps({'message':'Success', 'cantidad': cantidad, 'peso': peso}) 
             #print(jsonList)
             cursorLotes.close()
             ZT.close()
