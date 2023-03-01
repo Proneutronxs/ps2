@@ -392,8 +392,8 @@ def procesoManzana(request):
         cursorVaridad.execute(consultaVariedad)
         consulta = cursorVaridad.fetchone()
         if consulta:
-            cantidad = str(consulta[0])
-            jsonList = json.dumps({'message':'Success', 'cantidad': cantidad}) 
+            variedad = str(consulta[0])
+            jsonList = json.dumps({'message':'Success', 'variedad': variedad}) 
             #print(jsonList)
             cursorVaridad.close()
             ZT.close()
