@@ -24,7 +24,7 @@ const cantidadEmbaladoManzana = async() => {
         let cantEmbalado = JSON.parse(data)
         //console.log(cantEmbalado)
         let cantidadEmbaladoManzana = ``;
-        cantidadEmbaladoManzana = `<div class="numeros">CANT. DE CAJAS EMBALADAS: ${cantEmbalado.cantidad}<br>KILOS EMBALADOS APROX: ${cantEmbalado.peso} Kg. </div>`;
+        cantidadEmbaladoManzana = `<div class="numeros">CAJAS EMBALADAS: ${cantEmbalado.cantidad}<br>KILOS EMBALADOS: ${cantEmbalado.peso} Kg. </div>`;
         document.getElementById('detalle').innerHTML = cantidadEmbaladoManzana; 
         
     } catch(error){
@@ -91,7 +91,7 @@ const cantidadManzana = async() => {
         let dataLotes = JSON.parse(data)
         //console.log(dataLotes.cantidad)
         let cantidadLotes = ``;
-        cantidadLotes = `<div class="numeros">CANTIDAD DE BINS PROCESADOS: ${dataLotes.cantidad}<br>KILOS PROCESADOS APROX: ${dataLotes.peso} Kg.</div>`;
+        cantidadLotes = `<div class="numeros">BINS PROCESADOS: ${dataLotes.cantidad}<br>KILOS PROCESADOS: ${dataLotes.peso} Kg.</div>`;
         document.getElementById('detalle').innerHTML = cantidadLotes; 
         
     } catch(error){
