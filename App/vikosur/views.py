@@ -67,8 +67,10 @@ def listado_Clientes(self):
         if if_consulta:
             lista_consulta = []
             i = cursor_mostrarCliente.fetchall()
-            for i in if_consulta:            
-                pb = {'ID':i[0],'Cliente':i[1]}
+            for i in if_consulta:     
+                id = str(i[0])
+                cliente = str(i[0])       
+                pb = {'ID':id,'Cliente':cliente}
                 lista_consulta.append(pb)
             return HttpResponse([lista_consulta])
     except Exception as e:
