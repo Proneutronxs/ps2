@@ -69,7 +69,7 @@ def listado_Clientes(self):
             i = cursor_mostrarCliente.fetchall()
             for i in if_consulta:     
                 id = str(i[0])
-                cliente = str(i[0])       
+                cliente = str(i[1])       
                 pb = {'ID':id,'Cliente':cliente}
                 lista_consulta.append(pb)
             return HttpResponse([lista_consulta])
