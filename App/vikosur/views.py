@@ -100,7 +100,7 @@ def listado_Clientes_json(self):
                 cliente = str(i[1])       
                 result = {"ID":id,"Cliente":cliente}
                 lista_consulta.append(result)
-            jsonList = json.dumps({'message': 'Success', 'listado':lista_consulta}) 
+            jsonList = json.dumps({'listado':lista_consulta}) 
             return JsonResponse(jsonList, safe=False)
         else:
             jsonList = json.dumps({'message': 'Not Found'}) 
