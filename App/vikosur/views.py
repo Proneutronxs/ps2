@@ -94,25 +94,25 @@ def listado_Clientes_json(self):
         if_consulta = cursor_mostrarCliente.fetchall()
         if if_consulta:
             lista_consulta = []
-            i = cursor_mostrarCliente.fetchall()
             for i in if_consulta:     
                 id = str(i[0])
                 cliente = str(i[1])       
                 result = {"ID":id,"Cliente":cliente}
                 lista_consulta.append(result)
-            jsonList = json.dumps({'listado':lista_consulta}) 
-            return JsonResponse(jsonList, safe=False)
+            jsonList = json.dumps({'message': 'OK','listado':lista_consulta}) 
+            return HttpResponse(jsonList, content_type="application/json")
         else:
             jsonList = json.dumps({'message': 'Not Found'}) 
-            return JsonResponse(jsonList, safe=False)
+            return HttpResponse(jsonList, content_type="application/json")
     except Exception as e:
         print(e)
         error = str(e)
         jsonList = json.dumps({'error': error}) 
-        return JsonResponse(jsonList, safe=False)
+        return HttpResponse(jsonList, content_type="application/json")
     finally:
         cursor_mostrarCliente.close()
         Viko.close()
+
 
 def max_ID(self):
     Viko = ps_VikoSur()
