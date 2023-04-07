@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
+import json
 from ps.conexion import *
 import datetime
 from App.vikosur.modeloPDF import *
@@ -79,6 +81,35 @@ def listado_Clientes(self):
         lista_estado= [{'Info':e, 'Info2': respuesta}]
         estado = [lista_estado]
         return HttpResponse(estado)
+    finally:
+        cursor_mostrarCliente.close()
+        Viko.close()
+
+def listado_Clientes_json(self):
+    Viko = ps_VikoSur()
+    try:
+        cursor_mostrarCliente = Viko.cursor()
+        mostrarCliente = ("SELECT ID AS ID, nombreCliente AS Cliente FROM `Clientes` ORDER BY Cliente;")
+        cursor_mostrarCliente.execute(mostrarCliente)
+        if_consulta = cursor_mostrarCliente.fetchall()
+        if if_consulta:
+            lista_consulta = []
+            i = cursor_mostrarCliente.fetchall()
+            for i in if_consulta:     
+                id = str(i[0])
+                cliente = str(i[1])       
+                result = {"ID":id,"Cliente":cliente}
+                lista_consulta.append(result)
+            jsonList = json.dumps({'message': 'Success', 'listado':lista_consulta}) 
+            return JsonResponse(jsonList, safe=False)
+        else:
+            jsonList = json.dumps({'message': 'Not Found'}) 
+            return JsonResponse(jsonList, safe=False)
+    except Exception as e:
+        print(e)
+        error = str(e)
+        jsonList = json.dumps({'error': error}) 
+        return JsonResponse(jsonList, safe=False)
     finally:
         cursor_mostrarCliente.close()
         Viko.close()
