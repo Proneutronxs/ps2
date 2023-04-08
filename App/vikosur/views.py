@@ -114,6 +114,37 @@ def listado_Clientes_json(self):
         Viko.close()
 
 
+def data_Clientes_json(self, id):
+    Viko = ps_VikoSur()
+    try:
+        cursor_mostrarCliente = Viko.cursor()
+        mostrarCliente = ("SELECT nombreCliente, ciudadCliente, provinciaCliente, direccionCliente, cuitCliente, telefonoCliente FROM `Clientes` WHERE ID =`" + str(id) + "`;")
+        cursor_mostrarCliente.execute(mostrarCliente)
+        if_consulta = cursor_mostrarCliente.fetchone()
+        if if_consulta:
+            lista_consulta = []   
+            nombre = str(if_consulta[0])
+            ciudad = str(if_consulta[1])
+            provincia = str(if_consulta[2]) 
+            direccion = str(if_consulta[3])
+            cuit = str(if_consulta[4])
+            telefono = str(if_consulta[5])          
+            result = {"Nombre":nombre,"Ciudad":ciudad,"Provincia":provincia,"Direccion":direccion,"Cuit":cuit,"telefono":telefono}
+            lista_consulta.append(result)
+            jsonList = json.dumps({'message': 'Success','Data_Client':lista_consulta}) 
+            return HttpResponse(jsonList, content_type="application/json")
+        else:
+            jsonList = json.dumps({'message': 'Not Found'}) 
+            return HttpResponse(jsonList, content_type="application/json")
+    except Exception as e:
+        error = str(e)
+        jsonList = json.dumps({'error': error}) 
+        return HttpResponse(jsonList, content_type="application/json")
+    finally:
+        cursor_mostrarCliente.close()
+        Viko.close()
+
+
 def max_ID(self):
     Viko = ps_VikoSur()
     try:
