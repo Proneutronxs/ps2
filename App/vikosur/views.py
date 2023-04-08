@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 import json
+from django.views.decorators.csrf import csrf_exempt
 from ps.conexion import *
 import datetime
 from App.vikosur.modeloPDF import *
@@ -121,8 +122,7 @@ def data_Clientes_json(self, id):
         mostrarCliente = ("SELECT nombreCliente, ciudadCliente, provinciaCliente, direccionCliente, cuitCliente, telefonoCliente FROM `Clientes` WHERE ID='" + str(id) + "';")
         cursor_mostrarCliente.execute(mostrarCliente)
         if_consulta = cursor_mostrarCliente.fetchone()
-        if if_consulta:
-            lista_consulta = []   
+        if if_consulta: 
             nombre = str(if_consulta[0])
             ciudad = str(if_consulta[1])
             provincia = str(if_consulta[2]) 
@@ -130,7 +130,6 @@ def data_Clientes_json(self, id):
             cuit = str(if_consulta[4])
             telefono = str(if_consulta[5])          
             result = {"Nombre":nombre,"Ciudad":ciudad,"Provincia":provincia,"Direccion":direccion,"Cuit":cuit,"telefono":telefono}
-            lista_consulta.append(result)
             jsonList = json.dumps({'message': 'Success','Data_Client':result}) 
             return HttpResponse(jsonList, content_type="application/json")
         else:
@@ -143,6 +142,35 @@ def data_Clientes_json(self, id):
     finally:
         cursor_mostrarCliente.close()
         Viko.close()
+
+@csrf_exempt
+def update_data_Clientes_json(request):
+    if request.method == 'POST' and request.POST.get('id'):
+        id = request.POST.get('id')
+        nombre = request.POST.get('nombre')
+        ciudad = request.POST.get('ciudad')
+        provincia = request.POST.get('provincia')
+        direccion = request.POST.get('direccion')
+        cuit = request.POST.get('cuit')
+        telefono = request.POST.get('telefono')
+        Viko = ps_VikoSur()
+        try:
+            cursor = Viko.cursor()
+            actualizarCliente = ("UPDATE `Clientes` SET nombreCliente=%s, ciudadCliente=%s, provinciaCliente=%s, direccionCliente=%s, cuitCliente=%s, telefonoCliente=%s WHERE ID=%s")
+            cursor.execute(actualizarCliente, (nombre, ciudad, provincia, direccion, cuit, telefono, id))
+            Viko.commit()
+            jsonList = json.dumps({'message': 'Success', 'Data_Client': {'ID': id, 'Nombre': nombre, 'Ciudad': ciudad, 'Provincia': provincia, 'Direccion': direccion, 'Cuit': cuit, 'Telefono': telefono}})
+            return HttpResponse(jsonList, content_type="application/json")
+        except Exception as e:
+            error = str(e)
+            jsonList = json.dumps({'error': error}) 
+            return HttpResponse(jsonList, content_type="application/json")
+        finally:
+            cursor.close()
+            Viko.close()
+    else:
+            jsonList = json.dumps({'message': 'No se resolvió la petición.'}) 
+            return HttpResponse(jsonList, content_type="application/json")
 
 
 def max_ID(self):

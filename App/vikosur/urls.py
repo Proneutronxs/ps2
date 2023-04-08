@@ -13,6 +13,7 @@ urlpatterns = [
     ####FLUTTER URLS
     path('listado/clientes/json', views.listado_Clientes_json, name="list_client_json"),
     path('data/cliente/json/id=<str:id>', views.data_Clientes_json, name="data_client_json"),
+    path('update/data/cliente/json', views.update_data_Clientes_json, name="update_data_client_json"),
 
     
 
