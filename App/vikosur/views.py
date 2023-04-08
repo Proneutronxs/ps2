@@ -118,7 +118,7 @@ def data_Clientes_json(self, id):
     Viko = ps_VikoSur()
     try:
         cursor_mostrarCliente = Viko.cursor()
-        mostrarCliente = ("SELECT nombreCliente, ciudadCliente, provinciaCliente, direccionCliente, cuitCliente, telefonoCliente FROM `Clientes` WHERE ID =`" + str(id) + "`;")
+        mostrarCliente = ("SELECT nombreCliente, ciudadCliente, provinciaCliente, direccionCliente, cuitCliente, telefonoCliente FROM `Clientes` WHERE ID='" + str(id) + "';")
         cursor_mostrarCliente.execute(mostrarCliente)
         if_consulta = cursor_mostrarCliente.fetchone()
         if if_consulta:
