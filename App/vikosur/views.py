@@ -131,7 +131,7 @@ def data_Clientes_json(self, id):
             telefono = str(if_consulta[5])          
             result = {"Nombre":nombre,"Ciudad":ciudad,"Provincia":provincia,"Direccion":direccion,"Cuit":cuit,"telefono":telefono}
             lista_consulta.append(result)
-            jsonList = json.dumps({'message': 'Success','Data_Client':lista_consulta}) 
+            jsonList = json.dumps({'message': 'Success','Data_Client':result}) 
             return HttpResponse(jsonList, content_type="application/json")
         else:
             jsonList = json.dumps({'message': 'Not Found'}) 
