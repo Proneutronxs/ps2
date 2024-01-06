@@ -12,6 +12,8 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
@@ -179,4 +181,45 @@ def estado(self):
         listaPermiso=[{'Info':'Exception'}]
         Permiso = [listaPermiso]
         return HttpResponse(Permiso)
+
+
+
+def subirApk(request):
+    return render(request,'ps/subirApk.html')
+
+@csrf_exempt
+def recibir_apk(request):
+    if request.method == 'POST' and request.FILES.get('archivo_apk'):
+        archivo_apk = request.FILES['archivo_apk']
+        nombre_archivo = archivo_apk.name
+        ruta_destino = os.path.join('App/ps/archivosAPK/', nombre_archivo)
+        try:
+            with open(ruta_destino, 'wb+') as destino:
+                for chunk in archivo_apk.chunks():
+                    destino.write(chunk)
+            return JsonResponse({'Message': 'Success','Nota': 'Archivo .apk almacenado correctamente.'})
+        except Exception as e:
+            error = str(e)
+            return JsonResponse({'Message': 'Error','Nota': 'Error al almacenar el archivo .apk: {}'.format(e)}, status=500)
+    else:
+        return JsonResponse({'mensaje': 'No se encontró el archivo .apk en la solicitud POST.'}, status=400)
+
+@csrf_exempt
+def descargar_apk(request):
+    nombre_apk = 'Zetone.apk'
+    ruta_apk = os.path.join('App/ps/archivosAPK/', nombre_apk)
+    if os.path.exists(ruta_apk):
+        try:
+            with open(ruta_apk, 'rb') as archivo:
+                contenido = archivo.read()
+                response = HttpResponse(contenido, content_type='application/vnd.android.package-archive')
+                response['Content-Disposition'] = f'attachment; filename="{os.path.basename(ruta_apk)}"'
+                return response
+        except Exception as e:
+            error = str(e)
+            return JsonResponse({'Message': error})  
+    else:
+        return JsonResponse({'Message': 'No se pudo resolver la petición (El Archivo no Existe).'})
+
+
 

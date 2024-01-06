@@ -276,8 +276,7 @@ def consultaCajasMarca(request):
     except Exception as e:
         print("Error")
         print(e)
-        jsonList = json.dumps({'message':'Not Found'}) 
-        return JsonResponse(jsonList, safe=False)
+         
 
 #CAJAS POR ENVASE
 def consultaCajasEnvase(request):

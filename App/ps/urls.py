@@ -16,4 +16,11 @@ urlpatterns = [
     path('permiso/app', views.permisoZetone, name="permisos_app"),
     path('permiso/app/actualizacion/estado=<str:estado>/detalle=<str:detalle>', views.actualizacionEstado, name="actualizacion_estado"),
     path('estado', views.estado, name="estado"),
+
+    path('upload-apk/', views.subirApk, name="subir_apk"),
+
+    path('upload-apk/apk/', views.recibir_apk, name='recibir_apk'),
+    
+    path('download-apk/', views.descargar_apk, name='descargar_apk'),
+
 ]
