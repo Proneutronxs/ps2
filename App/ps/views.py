@@ -14,6 +14,8 @@ from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from ps.conexion import *
+from django.db import connections
 
 # Create your views here.
 def index(request):
@@ -223,3 +225,38 @@ def descargar_apk(request):
 
 
 
+def obtenerVersion(request):
+    if request.method == 'GET':
+        try:
+            with connections['ZetoneApp'].cursor() as cursor:
+                sql = "SELECT Texto " \
+                      "FROM Parametros_Aplicacion " \
+                      "WHERE Codigo = 'Version-App' "
+                cursor.execute(sql)
+                consulta = cursor.fetchone()
+                
+                if consulta:
+                    parametro = str(consulta[0])
+                    datos = {'Message': 'Success', 'Parametro': parametro}                    
+                    return JsonResponse(datos)
+                else:
+                    error = 'No se encontraron Parámetros.'
+                    response_data = {
+                        'Message': 'Error',
+                        'Nota': error
+                    }
+                return JsonResponse(response_data)
+        except Exception as e:
+            error = str(e)
+            response_data = {
+                'Message': 'Error',
+                'Nota': error
+            }
+            return JsonResponse(response_data)
+        finally:
+            connections['ZetoneApp'].close()
+    else:
+        response_data = {
+            'Message': 'No se pudo resolver la petición.'
+        }
+        return JsonResponse(response_data)

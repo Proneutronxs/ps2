@@ -86,6 +86,14 @@ DATABASES = {
         'PASSWORD': 'Proneutronxs$%Sideswipe$%1722',
         'HOST': 'localhost',
         'PORT': '3306',
+    },
+    'ZetoneApp': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ZetoneApp',
+        'USER': 'psphpmyadminps',
+        'PASSWORD': 'Proneutronxs$%Sideswipe$%1722',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 

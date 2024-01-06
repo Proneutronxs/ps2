@@ -20,7 +20,9 @@ urlpatterns = [
     path('upload-apk/', views.subirApk, name="subir_apk"),
 
     path('upload-apk/apk/', views.recibir_apk, name='recibir_apk'),
-    
+
     path('download-apk/', views.descargar_apk, name='descargar_apk'),
+
+    path('obtener-version/', views.obtenerVersion, name='obtener_version'),
 
 ]
