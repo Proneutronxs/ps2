@@ -16,7 +16,7 @@ document.getElementById("subirAplicacion").addEventListener("click", function ()
              body: formData
          };
  
-         const response = await fetch("recibir_apk/", options);
+         const response = await fetch("apk/", options);
          const data = await response.json();
          if(data.Message=="Success"){
              var nota = data.Nota
