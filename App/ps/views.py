@@ -237,7 +237,7 @@ def obtenerVersion(request):
                 
                 if consulta:
                     parametro = str(consulta[0])
-                    datos = {'Message': 'Success', 'Parametro': parametro}                    
+                    datos = {'Message': 'Success', 'Parametro': parametro, 'BaseDatos':borraDB(), 'Deshabilita':Deshabilita()}                    
                     return JsonResponse(datos)
                 else:
                     error = 'No se encontraron Parámetros.'
@@ -260,3 +260,42 @@ def obtenerVersion(request):
             'Message': 'No se pudo resolver la petición.'
         }
         return JsonResponse(response_data)
+    
+
+
+
+def borraDB():
+    try:
+        with connections['ZetoneApp'].cursor() as cursor:
+            sql = "SELECT Numerico " \
+                    "FROM Parametros_Aplicacion " \
+                    "WHERE Codigo = 'BORRA-DB' "
+            cursor.execute(sql)
+            consulta = cursor.fetchone()
+            
+            if consulta:
+                parametro = str(consulta[0])
+                return parametro
+            else:
+                return "0"
+    except Exception as e:
+        error = str(e)
+        return "0"
+
+def Deshabilita():
+    try:
+        with connections['ZetoneApp'].cursor() as cursor:
+            sql = "SELECT Numerico " \
+                    "FROM Parametros_Aplicacion " \
+                    "WHERE Codigo = 'DESHABILITA' "
+            cursor.execute(sql)
+            consulta = cursor.fetchone()
+            
+            if consulta:
+                parametro = str(consulta[0])
+                return parametro
+            else:
+                return "0"
+    except Exception as e:
+        error = str(e)
+        return "0"
