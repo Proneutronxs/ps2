@@ -414,7 +414,7 @@ def insert_Data_Remito_Post(request):
                 nombre = cliente + "_" + str(datos_Cliente[0])
                 pdf.output('App/vikosur/presupuestos/' + nombre + '.pdf', 'F')
                 
-            return JsonResponse({'Message': 'Success', 'PDF': nombre})
+            return JsonResponse({'Message': 'Success', 'Nota': 'El PDF se creó correctamente.', 'PDF': nombre})
         except Exception as e:
             respuesta = str(e)
             return JsonResponse({'Message': 'Not Found', 'Nota': respuesta})
