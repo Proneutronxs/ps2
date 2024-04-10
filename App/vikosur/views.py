@@ -371,11 +371,11 @@ def insert_Data_Remito_Post(request):
                 pdf.add_page()
                 pdf.text(x=130, y=80, txt= 'Presupuesto válido por ' + validez + ' días.')
                 pdf.set_font('Arial', 'B', 10)#VARIABLE
-                pdf.text(x=45, y=60, txt= str(datos_Cliente[2]))#VARIABLE NOMBRE
+                pdf.text(x=40, y=60, txt= str(datos_Cliente[2]))#VARIABLE NOMBRE
                 pdf.set_font('Arial', '', 8)#VARIABLE
-                pdf.text(x=45, y=64, txt= str(datos_Cliente[3]) + ', ' + str(datos_Cliente[4]))#VARIABLE
-                pdf.text(x=45, y=68, txt= str(datos_Cliente[6]))#VARIABLE   
-                pdf.text(x=45, y=72, txt= str(datos_Cliente[5]))#VARIABLE
+                pdf.text(x=40, y=64, txt= str(datos_Cliente[3]) + ', ' + str(datos_Cliente[4]))#VARIABLE
+                pdf.text(x=40, y=68, txt= str(datos_Cliente[6]))#VARIABLE   
+                pdf.text(x=40, y=72, txt= str(datos_Cliente[5]))#VARIABLE
                 pdf.set_font('Arial', '', 17)#VARIABLE
                 pdf.text(x=123, y=33, txt= 'N° 0005 - 00000' + str(datos_Cliente[0]))#VARIABLE
                 pdf.set_font('Arial', '', 13)#VARIABLE
