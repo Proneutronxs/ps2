@@ -329,9 +329,6 @@ def inserta_datos_presupuesto(idRemito, cantidad, descripcion, precio):
         Viko.commit()
     except Exception as e:
         respuesta = str(e)
-    finally:
-        cursor_insert_Data_Remito.close()
-        Viko.close()
 
 
 @csrf_exempt   
