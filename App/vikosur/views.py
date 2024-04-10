@@ -288,23 +288,76 @@ def download_remito(self, idRemito):
         estado = [lista_estado]
         return HttpResponse(estado)
 
+def maximo_ID():
+    Viko = ps_VikoSur()
+    try:
+        cursor_maxID = Viko.cursor()
+        mostrarCliente = ("SELECT MAX(ID) AS ID FROM `NumeroRemito`;")
+        cursor_maxID.execute(mostrarCliente)
+        if_consulta = cursor_maxID.fetchone()
+        if if_consulta:
+            return str(if_consulta[0])
+    except Exception as e:
+        print(e)
+    finally:
+        cursor_maxID.close()
+        Viko.close()
+
+
+def inserta_cliente(idCliente, fecha):
+    Viko = ps_VikoSur()
+    fechaMySql = datetime.datetime.strptime(str(fecha), "%d-%m-%Y").strftime("%Y-%m-%d")
+    variables = [idCliente, fechaMySql]
+    try:
+        cursor_insertRemito = Viko.cursor()
+        insertRemito = ("INSERT INTO `NumeroRemito` (`idCliente`, `fechaRemito`) VALUES (%s, %s);")
+        cursor_insertRemito.execute(insertRemito, variables)
+        Viko.commit()
+    except Exception as e:
+        respuesta = str(e)
+    finally:
+        cursor_insertRemito.close()
+        Viko.close()
+
+def inserta_datos_presupuesto(idRemito, cantidad, descripcion, precio):
+    variables = [idRemito, cantidad, descripcion, precio]
+    Viko = ps_VikoSur()
+    try:
+        cursor_insert_Data_Remito = Viko.cursor()
+        insertDataRemito = ("INSERT INTO `DatosRemito` (`idRemito`, `cantidadRemito`, `descripcionRemito`, `importeRemito`) VALUES (%s, %s, %s, %s);")
+        cursor_insert_Data_Remito.execute(insertDataRemito, variables)
+        Viko.commit()
+    except Exception as e:
+        respuesta = str(e)
+    finally:
+        cursor_insert_Data_Remito.close()
+        Viko.close()
+
+
 @csrf_exempt   
 def insert_Data_Remito_Post(request):
     if request.method == 'POST':
         body = request.body.decode('utf-8')
-        idRemito = str(json.loads(body)['idRemito'])
-        cantidad = str(json.loads(body)['Cantidad'])
-        descripcion = str(json.loads(body)['Descripcion'])
-        precio = str(json.loads(body)['Precio'])
+        fecha = str(json.loads(body)['Fecha'])
+        idCliente = str(json.loads(body)['idCliente'])
         validez = str(json.loads(body)['Validez'])
-        variables = [idRemito, cantidad, descripcion, precio]
+        datos = json.loads(body)['Data']
+
+        #### INSERTA EL CLIENTE
+        inserta_cliente(idCliente,fecha)
+
+        #### SELECCIONA EL MAXIMO ID
+        idRemito = maximo_ID()
+        
+        for item in datos:
+            cantidad = item['Cantidad']
+            descripcion = item['Descripcion']
+            precio = item['Precio']
+            inserta_datos_presupuesto(idRemito, cantidad, descripcion, precio)
+        
         Viko = ps_VikoSur()
         try:
             cursor_insert_Data_Remito = Viko.cursor()
-            insertDataRemito = ("INSERT INTO `DatosRemito` (`idRemito`, `cantidadRemito`, `descripcionRemito`, `importeRemito`) VALUES (%s, %s, %s, %s);")
-            cursor_insert_Data_Remito.execute(insertDataRemito, variables)
-            Viko.commit()
-
             datosCliente = ("SELECT        NumeroRemito.ID AS numeroPresupuesto, DATE_FORMAT(NumeroRemito.fechaRemito, '%d/%m/%Y') AS Fecha, Clientes.nombreCliente AS Nombre, Clientes.ciudadCliente AS Ciudad, Clientes.provinciaCliente AS Provincia, Clientes.cuitCliente AS CUIT, Clientes.direccionCliente AS Direccion\n"+
                             "FROM            NumeroRemito INNER JOIN\n"+
                                                     "Clientes ON NumeroRemito.idCliente = Clientes.ID\n"+
@@ -357,10 +410,11 @@ def insert_Data_Remito_Post(request):
                     pdf.set_font('Arial', '', 12)#VARIABLES
                     pdf.text(x=178, y=285, txt= '$' + str(total[0]))#VARIABLES TOTAL
                 
-
-                pdf.output('App/vikosur/presupuestos/'+str(datos_Cliente[2])+"_"+str(datos_Cliente[0])+'.pdf', 'F')
+                cliente = str(datos_Cliente[2]).replace(' ', '_')
+                nombre = cliente + "_" + str(datos_Cliente[0])
+                pdf.output('App/vikosur/presupuestos/' + nombre + '.pdf', 'F')
                 
-            return JsonResponse({'Message': 'Success'})
+            return JsonResponse({'Message': 'Success', 'PDF': nombre})
         except Exception as e:
             respuesta = str(e)
             return JsonResponse({'Message': 'Not Found', 'Nota': respuesta})
