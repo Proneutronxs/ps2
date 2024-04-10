@@ -43,7 +43,7 @@ class rondinPDF(FPDF):
         self.text(x=155, y=70, txt= '* Instrumentos de Laboratorio') 
         #self.line(120,74,120,84)#DIVISIÓN VERTICAL
         self.set_font('Arial', 'B', 8)
-        self.text(x=130, y=80, txt= 'Presupuesto válido por 5 días')
+        #self.text(x=130, y=80, txt= 'Presupuesto válido por 5 días')
         ##RECTANCULO DE ITEMS
         self.rect(x=10,y=88,w=190,h=170)
         self.set_font('Arial', 'B', 10)

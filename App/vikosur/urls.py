@@ -10,6 +10,10 @@ urlpatterns = [
     path('save/data/remito/idRemito=<str:idRemito>&cantidad=<str:cantidad>&descripcion=<str:descripcion>&precio=<str:precio>', views.insert_Data_Remito, name="data_remito"),
     path('download/remito/<str:idRemito>', views.download_remito, name="download_remito"),
 
+    path('crea/remito', views.insert_Data_Remito_Post, name="insert_remito_post"),
+
+
+
     ####FLUTTER URLS
     path('listado/clientes/json', views.listado_Clientes_json, name="list_client_json"),
     path('data/cliente/json/id=<str:id>', views.data_Clientes_json, name="data_client_json"),
